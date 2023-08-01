@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>updatedossieragent</shortname>
+   <description>Update Dossier Agent</description>
+   <url>/com/addinn/update/updatedossieragent</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

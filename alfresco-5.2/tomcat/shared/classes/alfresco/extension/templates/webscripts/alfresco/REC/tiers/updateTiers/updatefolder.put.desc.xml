@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update Folder</shortname>
+   <description>update dossier</description>
+   <url>/com/addinn/updatefolder</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

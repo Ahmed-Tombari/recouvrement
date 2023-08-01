@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>decisionDirecteur</shortname>
+   <description>DecisionDirecteur</description>
+   <url>/com/addinn/decisionDirecteur</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

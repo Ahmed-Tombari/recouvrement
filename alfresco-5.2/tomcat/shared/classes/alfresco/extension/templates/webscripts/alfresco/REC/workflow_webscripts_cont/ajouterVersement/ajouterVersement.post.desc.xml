@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>ajouterVersement</shortname>
+   <description>AjouterVersement</description>
+   <url>/com/addinn/ajouterVersement</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

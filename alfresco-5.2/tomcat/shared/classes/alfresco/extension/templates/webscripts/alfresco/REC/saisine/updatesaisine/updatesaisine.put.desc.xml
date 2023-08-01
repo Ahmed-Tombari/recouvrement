@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update saisine</shortname>
+   <description>update Saisine</description>
+   <url>/com/addinn/update/updatesaisine</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

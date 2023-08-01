@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>delete Folder</shortname>
+   <description>delete dossier</description>
+   <url>/com/addinn/deletefolder</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

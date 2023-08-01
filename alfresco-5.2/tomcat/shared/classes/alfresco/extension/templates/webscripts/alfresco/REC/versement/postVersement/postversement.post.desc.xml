@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Cree versement</shortname>
+   <description>CreeVersement</description>
+   <url>/com/addinn/post/postversement</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

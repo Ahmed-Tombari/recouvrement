@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>delete Chargee</shortname>
+   <description>Delete Chargee</description>
+   <url>/com/addinn/deletechargee</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

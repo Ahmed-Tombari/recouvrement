@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>validerDossier</shortname>
+   <description>Valider Dossier</description>
+   <url>/com/addinn/validerDossier</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

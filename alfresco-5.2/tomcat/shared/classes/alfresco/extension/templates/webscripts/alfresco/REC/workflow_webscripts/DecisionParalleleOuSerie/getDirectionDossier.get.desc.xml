@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Direction Dossier</shortname>
+   <description>Direction Dossier</description>
+   <url>/com/addinn/get/DirectionDossier</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

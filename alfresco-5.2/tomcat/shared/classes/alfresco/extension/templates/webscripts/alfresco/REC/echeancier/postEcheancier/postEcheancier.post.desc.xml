@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Cree des Echeanciers</shortname>
+   <description>CreeEcheancier</description>
+   <url>/com/addinn/post/postecheancier</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

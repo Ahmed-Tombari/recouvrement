@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste creance</shortname>
+   <description>ListecCreance</description>
+   <url>/com/addinn/get/getcreance</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

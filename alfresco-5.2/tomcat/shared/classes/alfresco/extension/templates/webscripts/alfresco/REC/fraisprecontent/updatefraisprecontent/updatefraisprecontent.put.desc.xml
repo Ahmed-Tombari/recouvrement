@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update FraispreContentieuse</shortname>
+   <description>update FraispreContentieuse</description>
+   <url>/com/addinn/update/updatefraisprecontent</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

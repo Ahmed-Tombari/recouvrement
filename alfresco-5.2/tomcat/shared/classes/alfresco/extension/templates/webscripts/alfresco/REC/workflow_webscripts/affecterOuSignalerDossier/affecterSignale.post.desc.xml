@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>affecterOuSignalerDossier</shortname>
+   <description>Affecter Ou Signaler Dossier</description>
+   <url>/com/addinn/affecterOuSignaler</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

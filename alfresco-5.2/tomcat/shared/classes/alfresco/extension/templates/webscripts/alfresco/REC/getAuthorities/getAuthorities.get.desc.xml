@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>getGroups</shortname>
+   <description>Get Groups</description>
+   <url>/com/addinn/get/getGroups</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

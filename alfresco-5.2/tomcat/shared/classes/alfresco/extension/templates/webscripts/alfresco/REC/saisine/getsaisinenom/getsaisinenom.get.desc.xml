@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste saisine</shortname>
+   <description>liste Saisine</description>
+   <url>/com/addinn/get/getsaisinenom</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

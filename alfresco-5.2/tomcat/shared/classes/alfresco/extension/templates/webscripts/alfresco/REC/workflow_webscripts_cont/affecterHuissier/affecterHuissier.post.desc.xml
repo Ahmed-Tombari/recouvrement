@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>affecterHuissier</shortname>
+   <description>AffecterHuissier</description>
+   <url>/com/addinn/affecterHuissier</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

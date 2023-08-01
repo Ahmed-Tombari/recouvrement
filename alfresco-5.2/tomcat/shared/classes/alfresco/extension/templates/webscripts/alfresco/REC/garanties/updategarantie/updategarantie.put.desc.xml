@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update garantie et Enquete</shortname>
+   <description>update Garantie et Enquete</description>
+   <url>/com/addinn/update/updategarantie</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

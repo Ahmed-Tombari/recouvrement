@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste versement avec Nom</shortname>
+   <description>ListeVersement Avec Nom</description>
+   <url>/com/addinn/get/getversementnom</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

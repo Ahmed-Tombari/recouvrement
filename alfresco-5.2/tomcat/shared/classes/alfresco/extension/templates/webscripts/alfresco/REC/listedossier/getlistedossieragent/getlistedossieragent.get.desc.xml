@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste Dossiers Agent</shortname>
+   <description>listeDossiersAgent</description>
+   <url>/com/addinn/get/getlistedossieragent</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

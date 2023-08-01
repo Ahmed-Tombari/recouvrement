@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>CreerTierDossier</shortname>
+   <description>créer dossier</description>
+   <url>/com/addinn/dossiertiers</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

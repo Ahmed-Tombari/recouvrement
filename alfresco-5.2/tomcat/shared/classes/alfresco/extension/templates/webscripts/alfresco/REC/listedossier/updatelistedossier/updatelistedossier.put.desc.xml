@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update dossier</shortname>
+   <description>update dossier</description>
+   <url>/com/addinn/update/listedossier?nomDossier={nomDossier}</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

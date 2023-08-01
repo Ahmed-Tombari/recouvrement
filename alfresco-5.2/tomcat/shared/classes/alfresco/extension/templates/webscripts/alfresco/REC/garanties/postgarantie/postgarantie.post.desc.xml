@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Creer garantie et Enquete</shortname>
+   <description>créer Garantie et Enquete</description>
+   <url>/com/addinn/post/postgarantie</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

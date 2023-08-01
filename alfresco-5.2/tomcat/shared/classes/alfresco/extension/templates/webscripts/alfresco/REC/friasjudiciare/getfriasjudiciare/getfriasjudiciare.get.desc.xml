@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>liste frais judiciare</shortname>
+   <description>Liste Frais Judiciare</description>
+   <url>/com/addinn/get/getfraisjudiciare</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

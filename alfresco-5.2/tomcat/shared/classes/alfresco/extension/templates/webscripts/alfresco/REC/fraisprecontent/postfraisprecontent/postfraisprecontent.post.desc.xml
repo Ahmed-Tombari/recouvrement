@@ -1,0 +1,10 @@
+<webscript>
+   <shortname>Creer Liste fraisprecontentieuse</shortname>
+   <description>créer FraispreContentieuse</description>
+   <url>/com/addinn/post/postfraisprecontent</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>
+

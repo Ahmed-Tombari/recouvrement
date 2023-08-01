@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update Charge</shortname>
+   <description>update Charge</description>
+   <url>/com/addinn/updatecharge?chargenom={chargenom}</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

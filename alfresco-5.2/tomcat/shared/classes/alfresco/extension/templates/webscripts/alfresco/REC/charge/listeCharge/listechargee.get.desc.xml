@@ -1,0 +1,8 @@
+<webscript>
+   <shortname>Liste Dossiers</shortname>
+   <description>listeDossiers</description>
+   <url>/com/addinn/get/listechargee</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+</webscript>

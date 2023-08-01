@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>documentScanner</shortname>
+   <description>DocumentScanner</description>
+   <url>/com/addinn/post/documentScanner</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

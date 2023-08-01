@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<webscript>
+   <shortname>retourAmiable</shortname>
+   <description>retourAmiable</description>
+   <url>/com/addinn/post/retourAmiable</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

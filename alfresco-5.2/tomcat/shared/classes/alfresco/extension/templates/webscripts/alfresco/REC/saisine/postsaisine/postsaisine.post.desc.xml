@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Creer saisine</shortname>
+   <description>créer Saisine</description>
+   <url>/com/addinn/post/postsaisine</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

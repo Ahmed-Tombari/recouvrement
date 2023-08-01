@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>realisationEnquetes</shortname>
+   <description>RealisationEnquetes</description>
+   <url>/com/addinn/realisationEnquetes</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

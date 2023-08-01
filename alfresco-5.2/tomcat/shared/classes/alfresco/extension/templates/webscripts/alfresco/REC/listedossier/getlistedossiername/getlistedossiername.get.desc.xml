@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste Dossiers Name</shortname>
+   <description>listeDossiersName</description>
+   <url>/com/addinn/get/getlistedossiername</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

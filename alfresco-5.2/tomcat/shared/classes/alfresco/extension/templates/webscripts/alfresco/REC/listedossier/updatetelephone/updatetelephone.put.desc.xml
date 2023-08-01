@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update telephone</shortname>
+   <description>update telephone</description>
+   <url>/com/addinn/update/updatetelephone</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

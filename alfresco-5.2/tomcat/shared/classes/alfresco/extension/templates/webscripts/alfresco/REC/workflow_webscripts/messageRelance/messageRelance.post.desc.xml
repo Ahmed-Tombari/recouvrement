@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>messageRelance</shortname>
+   <description>Message Relance</description>
+   <url>/com/addinn/messageRelance</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

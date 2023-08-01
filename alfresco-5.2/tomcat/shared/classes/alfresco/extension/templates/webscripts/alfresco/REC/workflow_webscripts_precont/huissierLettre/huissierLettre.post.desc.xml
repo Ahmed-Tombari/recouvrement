@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>huissierLettre</shortname>
+   <description>HuissierLettre</description>
+   <url>/com/addinn/huissierLettre</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

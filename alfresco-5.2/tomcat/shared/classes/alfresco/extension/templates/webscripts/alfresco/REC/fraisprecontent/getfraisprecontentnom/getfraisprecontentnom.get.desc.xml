@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste fraisprecontentieuse</shortname>
+   <description>FraispreContentieuse</description>
+   <url>/com/addinn/get/getfraisprecontentnom</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

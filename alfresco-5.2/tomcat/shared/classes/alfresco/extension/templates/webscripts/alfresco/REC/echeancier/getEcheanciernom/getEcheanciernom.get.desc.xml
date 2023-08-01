@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste des Echeanciers avec nomecheancier</shortname>
+   <description>ListeEcheanciernom</description>
+   <url>/com/addinn/get/getecheanciernom</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

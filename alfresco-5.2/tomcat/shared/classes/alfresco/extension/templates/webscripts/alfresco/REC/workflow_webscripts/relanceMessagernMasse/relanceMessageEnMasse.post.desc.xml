@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>relanceMessageEnMasse</shortname>
+   <description>RelanceMessageEnMasse</description>
+   <url>/com/addinn/relanceMessageEnMasse</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

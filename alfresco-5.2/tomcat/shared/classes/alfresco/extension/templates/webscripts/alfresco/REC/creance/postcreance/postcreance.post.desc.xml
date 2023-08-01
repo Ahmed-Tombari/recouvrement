@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Creer creance</shortname>
+   <description>créer Creance</description>
+   <url>/com/addinn/post/postcreance</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

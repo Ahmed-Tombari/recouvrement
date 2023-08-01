@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update frais judiciare</shortname>
+   <description>update Frais Judiciare</description>
+   <url>/com/addinn/update/updatefraisjudiciare</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

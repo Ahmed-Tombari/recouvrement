@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste Tiers</shortname>
+   <description>listeTiers</description>
+   <url>/com/addinn/get/getTiersnom</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

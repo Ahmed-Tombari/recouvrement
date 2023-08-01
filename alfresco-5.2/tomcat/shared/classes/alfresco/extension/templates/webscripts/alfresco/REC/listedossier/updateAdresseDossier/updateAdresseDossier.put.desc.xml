@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update Adresse Dossier</shortname>
+   <description>updateAdresseDossier</description>
+   <url>/com/addinn/update/updateAdresseDossier</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

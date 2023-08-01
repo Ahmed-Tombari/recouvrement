@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update versement</shortname>
+   <description>Update Versement</description>
+   <url>/com/addinn/update/updateversement</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

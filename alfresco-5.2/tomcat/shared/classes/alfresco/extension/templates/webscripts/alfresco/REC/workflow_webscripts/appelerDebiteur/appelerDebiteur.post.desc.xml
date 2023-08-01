@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>appelerDebiteur</shortname>
+   <description>AppelerDebiteur</description>
+   <url>/com/addinn/appelerDebiteur</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>alimenterDossier</shortname>
+   <description>AlimenterDossier</description>
+   <url>/com/addinn/alimenterDossier</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

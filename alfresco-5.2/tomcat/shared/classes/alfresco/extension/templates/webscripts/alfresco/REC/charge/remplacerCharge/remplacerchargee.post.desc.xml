@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>remplacer chargee</shortname>
+   <description>Remplacer Chargee</description>
+   <url>/com/addinn/remplacerchargee</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

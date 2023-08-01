@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Creer frais judiciare</shortname>
+   <description>créer Frais Judiciare</description>
+   <url>/com/addinn/post/postfraisjudiciare</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

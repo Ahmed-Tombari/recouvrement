@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>verifierPaiment</shortname>
+   <description>Verifier Paiment</description>
+   <url>/com/addinn/verifierPaiment</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

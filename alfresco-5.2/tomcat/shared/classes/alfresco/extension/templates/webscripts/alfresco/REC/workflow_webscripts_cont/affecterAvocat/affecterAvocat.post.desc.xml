@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>affecterAvocat</shortname>
+   <description>AffecterAvocat</description>
+   <url>/com/addinn/affecterAvocat</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

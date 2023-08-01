@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>Liste garantie et Enquete avec Nom</shortname>
+   <description>Liste Garantie et Enquete Avec Nom</description>
+   <url>/com/addinn/get/getgarantienom</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>

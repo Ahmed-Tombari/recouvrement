@@ -1,0 +1,9 @@
+<webscript>
+   <shortname>update Echeanciers</shortname>
+   <description>Update Echeanciers</description>
+   <url>/com/addinn/update/updateEcheanciers</url>
+   <format default="json"></format>
+   <authentication>user</authentication>
+   <transaction>required</transaction>
+   
+</webscript>
