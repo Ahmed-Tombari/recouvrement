@@ -1,0 +1,1629 @@
+<extension>
+    <modules>
+        <module>
+            <id>PhasePrecontentieuse</id>
+            <version>1.0</version>
+            <auto-deploy>true</auto-deploy>
+            <configurations>
+                <config evaluator="string-compare" condition="activiti$PhasePrecontentieuse">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drpre:nom"/>
+                                <show id="drpre:prenom"/>
+                                <show id="drpre:telephone"/>
+                                <show id="drpre:code"/>
+                                <show id="drpre:adresse"/>
+                                <show id="drpre:codepostale"/>
+                                <show id="drpre:ville"/>
+                                <show id="drpre:gouvernorat"/>
+                                <show id="drpre:pays"/>
+                                <show id="drpre:raisonSociale"/>
+                                <show id="drpre:identifiant"/>
+                                <show id="drpre:montantDeCreance"/>
+                                <show id="drpre:interetDeRetard"/>
+                                <show id="drpre:fraidDeDossier"/>
+
+
+                                <show id="drpre:natureDeLaCreance"/>
+                                <show id="drpre:garant"/>
+
+                                <show id="drpre:creances"/>
+                                <show id="drpre:montantDeLaCreance"/>
+                                <show id="drpre:nature"/>
+                                <show id="drpre:date"/>
+
+
+                                <show id="drpre:dateDeVersement"/>
+                                <show id="drpre:montantDeVersement"/>
+                                <show id="drpre:modeDeReglement"/>
+                                <show id="drpre:affectation"/>
+
+
+                                <show id="drpre:type"/>
+                                <show id="drpre:natureDeLHypothequeEnquetes"/>
+                                <show id="drpre:Rang"/>
+                                <show id="drpre:immatriculation"/>
+                                <show id="drpre:dateFinDeLHypotheque"/>
+                                <show id="drpre:montantDeLHypotheque"/>
+                                <show id="drpre:Valeure"/>
+
+
+                                <show id="drpre:nomDeSaisine"/>
+                                <show id="drpre:region"/>
+                                <show id="drpre:typeDeTiers"/>
+                                <show id="drpre:nomDeTiers"/>
+                               <!-- -->
+
+                                <show id="drpre:natureDuFrais"/>
+                                <show id="drpre:typeDuFrais"/>
+                                <show id="drpre:tiers"/>
+                                <show id="drpre:montantsDesFrais"/>
+                                <show id="drpre:dateDEffetDesIr"/>
+
+
+                                <show id="drpre:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+
+
+                            </field-visibility>
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="code et numero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="adresse , code postale et ville"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="gouvernorat et pays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+
+                                <set id="informationGenerale" appearance="title" label="Information Generale"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+                                <set id="detailDeCreance" appearance="title" label-id="items"
+                                     label="Détail de la créance" template="/org/alfresco/components/form/2-column-set.ftl"/>
+                                <set id="detailDeVersement" appearance="title" label-id="comment"
+                                     label=" Détail de versement " template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <set id="detailDesFrais" appearance="title" label="Détail des frais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+                                <set id="garantieEtEnquete" appearance="title" label-id="items"
+                                     label="Garantie et enquete" template="/org/alfresco/components/form/2-column-set.ftl"/>
+                                <set id="saisineDesTiers" appearance="title" label-id="comment"
+                                     label=" Saisine des tiers " template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <set id="phase" appearance="title" label="phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drpre:nom" label="nom" set="NomPrenom"/>
+                                <field id="drpre:prenom" label="prenom" set="NomPrenom"/>
+
+                                <field id="drpre:telephone" label="telephone" set="codeNumero"/>
+                                <field id="drpre:code" label="code" set="codeNumero"/>
+
+                                <field id="drpre:adresse" label="adresse" set="AdresseCodepostaleVille"/>
+                                <field id="drpre:codepostale" label="codepostale" set="AdresseCodepostaleVille"/>
+                                <field id="drpre:ville" label="ville" set="AdresseCodepostaleVille"/>
+
+                                <field id="drpre:gouvernorat" label="gouvernorat" set="GouvernoratPays"/>
+                                <field id="drpre:pays" label="pays" set="GouvernoratPays"/>
+
+                                <field id="drpre:raisonSociale"      label="raisonsociale" set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:identifiant"        label="identifiant" set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:montantDeCreance"   label="montant de creance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:interetDeRetard"    label="interet de retard" set="MontantInteretFrais"/>
+                                <field id="drpre:fraidDeDossier"     label="frais de dossier" set="MontantInteretFrais"/>
+
+                                <field id="drpre:natureDeLaCreance"  label="nature De La Creance"
+                                       set="informationGenerale"/>
+                                <field id="drpre:garant"             label="garant" set="informationGenerale"/>
+
+                                <field id="drpre:creances"           label="creances" set="detailDeCreance"/>
+                                <field id="drpre:montantDeLaCreance" label="montant De La Creance"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:nature"             label="nature" set="detailDeCreance"/>
+                                <field id="drpre:date"    label="date" set="detailDeCreance"/>
+
+                                <field id="drpre:dateDeVersement"    label="date De Versement" set="detailDeVersement"/>
+                                <field id="drpre:montantDeVersement" label="montant De Versement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:modeDeReglement"    label="mode De Reglement" set="detailDeVersement"/>
+                                <field id="drpre:affectation"        label="affectation" set="detailDeVersement"/>
+
+                                <field id="drpre:type"               label="type" set="MontantInteretFrais"/>
+                                <field id="drpre:natureDeLHypothequeEnquetes" label="nature De L'hypotheque Enquetes"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:Rang"                 label="Rang" set="MontantInteretFrais"/>
+                                <field id="drpre:immatriculation" label="immatriculation" set="MontantInteretFrais"/>
+                                <field id="drpre:dateFinDeLHypotheque" label="date Fin De 'hypotheque"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:montantDeLHypotheque" label="montant De L'hypotheque"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:Valeure" label="Valeur" set="MontantInteretFrais"/>
+
+                                <field id="drpre:nomDeSaisine" label="nom De Saisine" set="MontantInteretFrais"/>
+                                <field id="drpre:region" label="region" set="MontantInteretFrais"/>
+                                <field id="drpre:typeDeTiers" label="type De Tiers" set="MontantInteretFrais"/>
+                                <field id="drpre:nomDeTiers" label="nom De Tiers" set="MontantInteretFrais"/>
+                                <!--<field id="drpre:content" label="content" set="MontantInteretFrais"/>-->
+
+                                <field id="drpre:natureDuFrais" label="nature Du Frais" set="MontantInteretFrais"/>
+                                <field id="drpre:typeDuFrais" label="type Du Frais" set="MontantInteretFrais"/>
+                                <field id="drpre:tiers" label="tiers" set="MontantInteretFrais"/>
+                                <field id="drpre:montantsDesFrais" label="montants Des Frais" set="MontantInteretFrais"/>
+                                <field id="drpre:dateDEffetDesIr" label="date D'effetDesIr" set="MontantInteretFrais"/>
+
+                                <field id="drpre:phase" label="phase" set="phase"/>
+
+                                <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drpre:verifierdossier">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drpre:nom"/>
+                                <show id="drpre:prenom"/>
+                                <show id="drpre:telephone"/>
+                                <show id="drpre:code"/>
+                                <show id="drpre:adresse"/>
+                                <show id="drpre:codepostale"/>
+                                <show id="drpre:ville"/>
+                                <show id="drpre:gouvernorat"/>
+                                <show id="drpre:pays"/>
+                                <show id="drpre:raisonSociale"/>
+                                <show id="drpre:identifiant"/>
+                                <show id="drpre:montantDeCreance"/>
+                                <show id="drpre:interetDeRetard"/>
+                                <show id="drpre:fraidDeDossier"/>
+
+
+                                <show id="drpre:natureDeLaCreance"/>
+                                <show id="drpre:garant"/>
+
+                                <show id="drpre:creances"/>
+                                <show id="drpre:montantDeLaCreance"/>
+                                <show id="drpre:nature"/>
+                                <show id="drpre:date"/>
+
+
+                                <show id="drpre:dateDeVersement"/>
+                                <show id="drpre:montantDeVersement"/>
+                                <show id="drpre:modeDeReglement"/>
+                                <show id="drpre:affectation"/>
+
+
+                                <show id="drpre:type"/>
+                                <show id="drpre:natureDeLHypothequeEnquetes"/>
+                                <show id="drpre:Rang"/>
+                                <show id="drpre:immatriculation"/>
+                                <show id="drpre:dateFinDeLHypotheque"/>
+                                <show id="drpre:montantDeLHypotheque"/>
+                                <show id="drpre:Valeure"/>
+
+
+                                <show id="drpre:nomDeSaisine"/>
+                                <show id="drpre:region"/>
+                                <show id="drpre:typeDeTiers"/>
+                                <show id="drpre:nomDeTiers"/>
+
+
+                                <show id="drpre:natureDuFrais"/>
+                                <show id="drpre:typeDuFrais"/>
+                                <show id="drpre:tiers"/>
+                                <show id="drpre:montantsDesFrais"/>
+                                <show id="drpre:dateDEffetDesIr"/>
+
+
+                                <show id="drpre:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drpre:verifierdossierOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                    <set id="NomPrenom" appearance="title"
+                                         template="/org/alfresco/components/form/2-column-set.ftl"
+                                         label-id="workflow.set.nomprenom"/>
+                                    <set id="codeNumero" appearance="title"
+                                         template="/org/alfresco/components/form/2-column-set.ftl"
+                                         label-id="workflow.set.codeNumero"/>
+                                    <set id="AdresseCodepostaleVille" appearance="title"
+                                         template="/org/alfresco/components/form/3-column-set.ftl"
+                                         label-id="workflow.set.AdresseCodepostaleVille"/>
+                                    <set id="GouvernoratPays" appearance="title"
+                                         template="/org/alfresco/components/form/2-column-set.ftl"
+                                         label-id="workflow.set.GouvernoratPays"/>
+                                    <set id="RaisonsocialeIdentifiant" appearance="title"
+                                         template="/org/alfresco/components/form/2-column-set.ftl"
+                                         label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                    <set id="MontantInteretFrais" appearance="title"
+                                         template="/org/alfresco/components/form/3-column-set.ftl"
+                                         label-id="workflow.set.MontantInteretFrais"/>
+
+                                    <set id="informationGenerale" appearance="title"
+                                         template="/org/alfresco/components/form/2-column-set.ftl"
+                                         label-id="workflow.set.phase "/>
+                                    <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                         template="/org/alfresco/components/form/2-column-set.ftl" />
+                                    <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                         template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                    <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                         template="/org/alfresco/components/form/2-column-set.ftl" />
+                                    <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                         template="/org/alfresco/components/form/2-column-set.ftl" />
+                                    <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                         template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                    <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                    <set id="items" appearance="title" label-id="items" label="items"/>
+                                    <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                    <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                         template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drpre:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drpre:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drpre:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drpre:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drpre:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drpre:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drpre:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drpre:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drpre:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drpre:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drpre:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drpre:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drpre:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drpre:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drpre:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drpre:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                    <field id="packageItems" set="items"/>
+
+
+                                    <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+
+                                <field id="drpre:verifierdossierOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drpre:communicationAvecLeHuissierNotaire">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drpre:nom"/>
+                                <show id="drpre:prenom"/>
+                                <show id="drpre:telephone"/>
+                                <show id="drpre:code"/>
+                                <show id="drpre:adresse"/>
+                                <show id="drpre:codepostale"/>
+                                <show id="drpre:ville"/>
+                                <show id="drpre:gouvernorat"/>
+                                <show id="drpre:pays"/>
+                                <show id="drpre:raisonSociale"/>
+                                <show id="drpre:identifiant"/>
+                                <show id="drpre:montantDeCreance"/>
+                                <show id="drpre:interetDeRetard"/>
+                                <show id="drpre:fraidDeDossier"/>
+
+
+                                <show id="drpre:natureDeLaCreance"/>
+                                <show id="drpre:garant"/>
+
+                                <show id="drpre:creances"/>
+                                <show id="drpre:montantDeLaCreance"/>
+                                <show id="drpre:nature"/>
+                                <show id="drpre:date"/>
+
+
+                                <show id="drpre:dateDeVersement"/>
+                                <show id="drpre:montantDeVersement"/>
+                                <show id="drpre:modeDeReglement"/>
+                                <show id="drpre:affectation"/>
+
+
+                                <show id="drpre:type"/>
+                                <show id="drpre:natureDeLHypothequeEnquetes"/>
+                                <show id="drpre:Rang"/>
+                                <show id="drpre:immatriculation"/>
+                                <show id="drpre:dateFinDeLHypotheque"/>
+                                <show id="drpre:montantDeLHypotheque"/>
+                                <show id="drpre:Valeure"/>
+
+
+                                <show id="drpre:nomDeSaisine"/>
+                                <show id="drpre:region"/>
+                                <show id="drpre:typeDeTiers"/>
+                                <show id="drpre:nomDeTiers"/>
+
+
+                                <show id="drpre:natureDuFrais"/>
+                                <show id="drpre:typeDuFrais"/>
+                                <show id="drpre:tiers"/>
+                                <show id="drpre:montantsDesFrais"/>
+                                <show id="drpre:dateDEffetDesIr"/>
+
+
+                                <show id="drpre:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drpre:communicationAvecLeHuissierNotaireOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drpre:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drpre:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drpre:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drpre:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drpre:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drpre:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drpre:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drpre:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drpre:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drpre:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drpre:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drpre:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drpre:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drpre:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drpre:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drpre:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="drpre:communicationAvecLeHuissierNotaireOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drpre:alimentationDossier">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drpre:nom"/>
+                                <show id="drpre:prenom"/>
+                                <show id="drpre:telephone"/>
+                                <show id="drpre:code"/>
+                                <show id="drpre:adresse"/>
+                                <show id="drpre:codepostale"/>
+                                <show id="drpre:ville"/>
+                                <show id="drpre:gouvernorat"/>
+                                <show id="drpre:pays"/>
+                                <show id="drpre:raisonSociale"/>
+                                <show id="drpre:identifiant"/>
+                                <show id="drpre:montantDeCreance"/>
+                                <show id="drpre:interetDeRetard"/>
+                                <show id="drpre:fraidDeDossier"/>
+
+
+                                <show id="drpre:natureDeLaCreance"/>
+                                <show id="drpre:garant"/>
+
+                                <show id="drpre:creances"/>
+                                <show id="drpre:montantDeLaCreance"/>
+                                <show id="drpre:nature"/>
+                                <show id="drpre:date"/>
+
+
+                                <show id="drpre:dateDeVersement"/>
+                                <show id="drpre:montantDeVersement"/>
+                                <show id="drpre:modeDeReglement"/>
+                                <show id="drpre:affectation"/>
+
+
+                                <show id="drpre:type"/>
+                                <show id="drpre:natureDeLHypothequeEnquetes"/>
+                                <show id="drpre:Rang"/>
+                                <show id="drpre:immatriculation"/>
+                                <show id="drpre:dateFinDeLHypotheque"/>
+                                <show id="drpre:montantDeLHypotheque"/>
+                                <show id="drpre:Valeure"/>
+
+
+                                <show id="drpre:nomDeSaisine"/>
+                                <show id="drpre:region"/>
+                                <show id="drpre:typeDeTiers"/>
+                                <show id="drpre:nomDeTiers"/>
+
+
+                                <show id="drpre:natureDuFrais"/>
+                                <show id="drpre:typeDuFrais"/>
+                                <show id="drpre:tiers"/>
+                                <show id="drpre:montantsDesFrais"/>
+                                <show id="drpre:dateDEffetDesIr"/>
+
+
+                                <show id="drpre:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drpre:alimentationDossierOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drpre:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drpre:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drpre:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drpre:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drpre:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drpre:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drpre:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drpre:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drpre:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drpre:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drpre:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drpre:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drpre:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drpre:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drpre:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drpre:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+
+                                <field id="drpre:alimentationDossierOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drpre:verificationDePaiement">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drpre:nom"/>
+                                <show id="drpre:prenom"/>
+                                <show id="drpre:telephone"/>
+                                <show id="drpre:code"/>
+                                <show id="drpre:adresse"/>
+                                <show id="drpre:codepostale"/>
+                                <show id="drpre:ville"/>
+                                <show id="drpre:gouvernorat"/>
+                                <show id="drpre:pays"/>
+                                <show id="drpre:raisonSociale"/>
+                                <show id="drpre:identifiant"/>
+                                <show id="drpre:montantDeCreance"/>
+                                <show id="drpre:interetDeRetard"/>
+                                <show id="drpre:fraidDeDossier"/>
+
+
+                                <show id="drpre:natureDeLaCreance"/>
+                                <show id="drpre:garant"/>
+
+                                <show id="drpre:creances"/>
+                                <show id="drpre:montantDeLaCreance"/>
+                                <show id="drpre:nature"/>
+                                <show id="drpre:date"/>
+
+
+                                <show id="drpre:dateDeVersement"/>
+                                <show id="drpre:montantDeVersement"/>
+                                <show id="drpre:modeDeReglement"/>
+                                <show id="drpre:affectation"/>
+
+
+                                <show id="drpre:type"/>
+                                <show id="drpre:natureDeLHypothequeEnquetes"/>
+                                <show id="drpre:Rang"/>
+                                <show id="drpre:immatriculation"/>
+                                <show id="drpre:dateFinDeLHypotheque"/>
+                                <show id="drpre:montantDeLHypotheque"/>
+                                <show id="drpre:Valeure"/>
+
+
+                                <show id="drpre:nomDeSaisine"/>
+                                <show id="drpre:region"/>
+                                <show id="drpre:typeDeTiers"/>
+                                <show id="drpre:nomDeTiers"/>
+
+
+                                <show id="drpre:natureDuFrais"/>
+                                <show id="drpre:typeDuFrais"/>
+                                <show id="drpre:tiers"/>
+                                <show id="drpre:montantsDesFrais"/>
+                                <show id="drpre:dateDEffetDesIr"/>
+
+
+                                <show id="drpre:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drpre:verifierpaiementOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drpre:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drpre:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drpre:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drpre:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drpre:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drpre:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drpre:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drpre:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drpre:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drpre:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drpre:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drpre:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drpre:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drpre:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drpre:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drpre:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+
+                                <field id="drpre:verifierpaiementOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drpre:signalerDossier">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drpre:nom"/>
+                                <show id="drpre:prenom"/>
+                                <show id="drpre:telephone"/>
+                                <show id="drpre:code"/>
+                                <show id="drpre:adresse"/>
+                                <show id="drpre:codepostale"/>
+                                <show id="drpre:ville"/>
+                                <show id="drpre:gouvernorat"/>
+                                <show id="drpre:pays"/>
+                                <show id="drpre:raisonSociale"/>
+                                <show id="drpre:identifiant"/>
+                                <show id="drpre:montantDeCreance"/>
+                                <show id="drpre:interetDeRetard"/>
+                                <show id="drpre:fraidDeDossier"/>
+
+
+                                <show id="drpre:natureDeLaCreance"/>
+                                <show id="drpre:garant"/>
+
+                                <show id="drpre:creances"/>
+                                <show id="drpre:montantDeLaCreance"/>
+                                <show id="drpre:nature"/>
+                                <show id="drpre:date"/>
+
+
+                                <show id="drpre:dateDeVersement"/>
+                                <show id="drpre:montantDeVersement"/>
+                                <show id="drpre:modeDeReglement"/>
+                                <show id="drpre:affectation"/>
+
+
+                                <show id="drpre:type"/>
+                                <show id="drpre:natureDeLHypothequeEnquetes"/>
+                                <show id="drpre:Rang"/>
+                                <show id="drpre:immatriculation"/>
+                                <show id="drpre:dateFinDeLHypotheque"/>
+                                <show id="drpre:montantDeLHypotheque"/>
+                                <show id="drpre:Valeure"/>
+
+
+                                <show id="drpre:nomDeSaisine"/>
+                                <show id="drpre:region"/>
+                                <show id="drpre:typeDeTiers"/>
+                                <show id="drpre:nomDeTiers"/>
+
+
+                                <show id="drpre:natureDuFrais"/>
+                                <show id="drpre:typeDuFrais"/>
+                                <show id="drpre:tiers"/>
+                                <show id="drpre:montantsDesFrais"/>
+                                <show id="drpre:dateDEffetDesIr"/>
+
+
+                                <show id="drpre:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drpre:transitionOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drpre:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drpre:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drpre:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drpre:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drpre:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drpre:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drpre:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drpre:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drpre:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drpre:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drpre:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drpre:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drpre:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drpre:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drpre:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drpre:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+
+                                <field id="drpre:transitionOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drpre:validationDePaiement">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drpre:nom"/>
+                                <show id="drpre:prenom"/>
+                                <show id="drpre:telephone"/>
+                                <show id="drpre:code"/>
+                                <show id="drpre:adresse"/>
+                                <show id="drpre:codepostale"/>
+                                <show id="drpre:ville"/>
+                                <show id="drpre:gouvernorat"/>
+                                <show id="drpre:pays"/>
+                                <show id="drpre:raisonSociale"/>
+                                <show id="drpre:identifiant"/>
+                                <show id="drpre:montantDeCreance"/>
+                                <show id="drpre:interetDeRetard"/>
+                                <show id="drpre:fraidDeDossier"/>
+
+
+                                <show id="drpre:natureDeLaCreance"/>
+                                <show id="drpre:garant"/>
+
+                                <show id="drpre:creances"/>
+                                <show id="drpre:montantDeLaCreance"/>
+                                <show id="drpre:nature"/>
+                                <show id="drpre:date"/>
+
+
+                                <show id="drpre:dateDeVersement"/>
+                                <show id="drpre:montantDeVersement"/>
+                                <show id="drpre:modeDeReglement"/>
+                                <show id="drpre:affectation"/>
+
+
+                                <show id="drpre:type"/>
+                                <show id="drpre:natureDeLHypothequeEnquetes"/>
+                                <show id="drpre:Rang"/>
+                                <show id="drpre:immatriculation"/>
+                                <show id="drpre:dateFinDeLHypotheque"/>
+                                <show id="drpre:montantDeLHypotheque"/>
+                                <show id="drpre:Valeure"/>
+
+
+                                <show id="drpre:nomDeSaisine"/>
+                                <show id="drpre:region"/>
+                                <show id="drpre:typeDeTiers"/>
+                                <show id="drpre:nomDeTiers"/>
+
+
+                                <show id="drpre:natureDuFrais"/>
+                                <show id="drpre:typeDuFrais"/>
+                                <show id="drpre:tiers"/>
+                                <show id="drpre:montantsDesFrais"/>
+                                <show id="drpre:dateDEffetDesIr"/>
+
+
+                                <show id="drpre:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drpre:transitionOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drpre:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drpre:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drpre:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drpre:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drpre:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drpre:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drpre:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drpre:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drpre:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drpre:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drpre:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drpre:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drpre:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drpre:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drpre:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drpre:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drpre:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drpre:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drpre:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drpre:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drpre:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drpre:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drpre:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drpre:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drpre:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+
+
+                                <field id="drpre:transitionOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+
+            </configurations>
+        </module>
+    </modules>
+</extension>

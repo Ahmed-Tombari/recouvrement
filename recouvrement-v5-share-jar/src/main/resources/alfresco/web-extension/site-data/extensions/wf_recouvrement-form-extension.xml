@@ -1,0 +1,113 @@
+<extension>
+	<modules>
+		<module>
+			<id>Config des forms WF recouvrement</id>
+			<version>1.0</version>
+			<auto-deploy>true</auto-deploy>
+			<configurations>
+				<config evaluator="string-compare" condition="activiti$recouvrement">
+					<forms>
+						<form>
+							<field-visibility>
+								<show id="bpm:workflowDescription" />
+								<show id="packageItems" />
+								<show id="bpm:comment" />
+								<show id="transitions" />
+								<show id="bpm:status" />
+							</field-visibility>
+							<appearance>
+								<set id="" appearance="title" label-id="workflow.set.general" />
+								<set id="items" appearance="title" label-id="workflow.field.items" />
+								<set id="progress" appearance="title" label-id="workflow.set.task.progress" />
+								<set id="other" appearance="title" label-id="workflow.set.other" />
+								<field id="bpm:workflowDescription" label-id="workflow.field.message">
+									<control template="/org/alfresco/components/form/controls/textarea.ftl">
+										<control-param name="style">width: 95%</control-param>
+									</control>
+								</field>
+								<field id="packageItems" set="items" >
+
+								</field>
+								<field id="bpm:comment" />
+								<field id="bpm:status" set="progress" />
+								<field id="bpm:status" set="progress" />
+							</appearance>
+						</form>
+					</forms>
+				</config>
+
+
+				<!-- Formulaire du workflow "Génération de l'arrêté" -->
+				<config evaluator="task-type" condition="rwf:dossierRecouvrement">
+					<forms>
+						<form>
+							<field-visibility>
+								<show id="bpm:status" />
+								<show id="rwf:NomPrenomDebuter" />
+								<show id="rwf:phase" />
+								<show id="rwf:montant" />
+								<show id="packageItems" />
+								<show id="bpm:comment" />
+								<show id="rwf:dossierRecouvrementOutcome" />
+
+							</field-visibility>
+							<appearance>
+								<set id="items" appearance="title" label-id="workflow.set.items" />
+								<set id="Montant" appearance="title" label-id="Montant" />
+								<set id="arrete" appearance="title" label-id="workflow.set.arrete" />
+								<set id="response" appearance="title" label-id="Réponse" />
+
+
+								<field id="rwf:status"
+									label="Statut du dossier" />
+
+								<field id="rwf:NomPrenomDebuter"
+									label="Nom Prénom Débuter">
+								</field>
+
+								<field id="rwf:phase"
+									label="Phase">
+								</field>
+
+
+
+
+								<field id="rwf:montant" set="Montant"
+									label-id="Montant">
+								</field>
+
+								<field id="packageItems" set="items">
+								</field>
+
+
+
+								<field id="bpm:comment" label-id="workflow.field.comment"
+									set="response" mandatory="true">
+									<control template="/org/alfresco/components/form/controls/textarea.ftl">
+										<control-param name="style">width: 95%</control-param>
+									</control>
+								</field>
+								<field id="rwf:dossierRecouvrementOutcome" label-id="workflow.field.outcome"
+									set="response">
+									<control
+										template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl" />
+
+									<!-- <constraint-handlers> -->
+									<!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+									<!-- event="keyup" /> -->
+									<!-- </constraint-handlers> -->
+								</field>
+
+							</appearance>
+						</form>
+					</forms>
+				</config>
+
+			
+
+
+
+			</configurations>
+		</module>
+	</modules>
+</extension>

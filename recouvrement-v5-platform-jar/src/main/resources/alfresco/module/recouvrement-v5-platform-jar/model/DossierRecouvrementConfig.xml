@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0"
+	name="drccf:DossierRecouvrementConfig">
+	<description>Modèle des dossiers d'instruction technique de la
+		direction de la voirie
+	</description>
+	<author>gsu</author>
+	<imports>
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<import uri="http://www.alfresco.org/model/datalist/1.0"
+			prefix="dl" />
+		<import uri="http://www.alfresco.org/model/content/1.0"
+			prefix="cm" />
+	</imports>
+	<namespaces>
+		<namespace
+			uri="http://www.addinn.com/model/DossierRecouvrementConfig/1.0"
+			prefix="drccf" />
+	</namespaces>
+	<data-types />
+	<constraints />
+	<types>
+
+	</types>
+
+	<aspects>
+		<aspect name="drccf:increment">
+			<title>increment</title>
+			<properties>
+				<property name="drccf:increment">
+					<title>auto Increment</title>
+					<type>d:int</type>
+					<mandatory>true</mandatory>
+				</property>
+
+			</properties>
+		</aspect>
+		<aspect name="drccf:agent">
+			<title>agent</title>
+			<properties>
+				<property name="drccf:agent">
+					<title>agent</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+
+			</properties>
+		</aspect>
+		<aspect name="drccf:dossier">
+			<title>Dossier d'instruction technique</title>
+			<properties>
+
+				<property name="drccf:etat">
+					<title>etat</title>
+					<type>d:text</type>
+
+
+					<index enabled="true">
+						<tokenised>TRUE</tokenised>
+						<facetable>false</facetable>
+					</index>
+					<constraints>
+						<constraint name="drccf:etat_list" type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Complet</value>
+									<value>Incomplet</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="drccf:statusAmiable">
+					<title>status</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>TRUE</tokenised>
+						<facetable>false</facetable>
+					</index>
+					<constraints>
+						<constraint name="drccf:statutAmiable_list" type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Non affecté</value>
+									<value>À Faire</value>
+									<value>Affecté</value>
+									<value>En cours</value>
+									<value>Traité</value>
+									<value>Signalé</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="drccf:statusPrecontentieuse">
+					<title>status</title>
+					<type>d:text</type>
+
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>TRUE</tokenised>
+						<facetable>false</facetable>
+					</index>
+					<constraints>
+						<constraint name="drccf:statusPrecontentieuse_list"
+									type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Non affecté</value>
+									<value>À Faire</value>
+									<value>Affecté</value>
+									<value>En cours</value>
+									<value>Traité</value>
+									<value>Signalé</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="drccf:statusContentieuse">
+					<title>status</title>
+					<type>d:text</type>
+
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>TRUE</tokenised>
+						<facetable>false</facetable>
+					</index>
+					<constraints>
+						<constraint name="drccf:statusContentieuse_list"
+									type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Non affecté</value>
+									<value>À Faire</value>
+									<value>Affecté</value>
+									<value>En cours</value>
+									<value>Traité</value>
+									<value>Signalé</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="drccf:phase">
+					<title>phase</title>
+					<type>d:text</type>
+
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>TRUE</tokenised>
+						<facetable>false</facetable>
+					</index>
+					<constraints>
+						<constraint name="drccf:phase_list" type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Amiable</value>
+									<value>Précontentieuse</value>
+									<value>Judiciaire</value>
+
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="drccf:payee">
+					<title>payee ou non</title>
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="drccf:typeRelance">
+					<title>Type Relance</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+				</property>
+
+			</properties>
+		</aspect>
+		<aspect name="drccf:parametrageNotification">
+			<properties>
+				<property name="drccf:statutNotificationMessage">
+					<title>Statut Notification</title>
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+				</property>
+				<property name="drccf:statutNotificationAppel">
+					<title>Statut Notification</title>
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+				</property>
+				<property name="drccf:nombreMessageDeRappel">
+					<title>NombreMessageDappele</title>
+					<type>d:int</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+				</property>
+				<property name="drccf:nombreAppel">
+					<title>nombreAppel</title>
+					<type>d:int</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+				</property>
+
+			</properties>
+		</aspect>
+	</aspects>
+</model>

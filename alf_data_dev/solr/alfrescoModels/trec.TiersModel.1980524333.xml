@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0" name="trec:TiersModel">
+    <author>ahmed</author>
+    <imports>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+    </imports>
+    <namespaces>
+        <namespace uri="http://www.addinn.com/model/tiersModel/1.0" prefix="trec"/>
+    </namespaces>
+    <data-types/>
+    <constraints>
+        <constraint name="trec:tiersType_list" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value>Avocat</value>
+                    <value>Huissier</value>
+                    <value>Expert</value>
+                </list>
+            </parameter>
+        </constraint>
+    </constraints>
+    <types/>
+    <aspects>
+        <aspect name="trec:tiersListe">
+            <title>liste des Tiers</title>
+            <properties>
+                <property name="trec:tiersVille">
+                    <title>Ville</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="trec:tiersType">
+                    <title>Type tiers</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                    <constraints>
+                        <constraint name="trec:TiersModel_tiersListe_tiersType_anon_0" ref="trec:tiersType_list"/>
+                    </constraints>
+                </property>
+                <property name="trec:tiersGouvernorat">
+                    <title>Gouvernorat</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="trec:tiersAdresse">
+                    <title>Adresse tiers</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="trec:tierseEmail">
+                    <title>Tiers e-mail</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="trec:tiersTelephone">
+                    <title>Telephone tiers</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="trec:tiersNom">
+                    <title>Nom tiers</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="trec:tiersPrenom">
+                    <title>Prenom</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="trec:tiersCodePostale">
+                    <title>Codepostale</title>
+                    <type>d:int</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+    </aspects>
+</model>

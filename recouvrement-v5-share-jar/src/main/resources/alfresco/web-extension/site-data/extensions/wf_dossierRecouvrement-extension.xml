@@ -1,0 +1,659 @@
+<extension>
+    <modules>
+        <module>
+            <id>PhaseAmiable</id>
+            <version>1.0</version>
+            <auto-deploy>true</auto-deploy>
+            <configurations>
+                <config evaluator="string-compare" condition="activiti$PhaseAmiable">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drc:nom" />
+                                <show id="drc:prenom" />
+                                <show id="drc:telephone" />
+                                <show id="drc:code" />
+                                <show id="drc:cin" />
+                                <show id="drc:adresse" />
+                                <show id="drc:codepostale" />
+                                <show id="drc:ville" />
+                                <show id="drc:gouvernorat" />
+                                <show id="drc:pays" />
+                                <show id="drc:raisonSociale" />
+                                <show id="drc:identifiant" />
+                                <show id="drc:montantDeCreance" />
+                                <show id="drc:interetDeRetard" />
+                                <show id="drc:fraidDeDossier" />
+                                <show id="drc:phase" />
+                                <show id="bpm:workflowDescription" />
+                                <show id="bpm:comment" />
+                                <show id="packageItems" />
+
+
+
+                            </field-visibility>
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title" template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                label="code, numero et cin"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                label="adresse , code postale et ville"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                label="gouvernorat et pays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                label="Montant, Interet et Frais"/>
+                                <set id="phase" appearance="title" label="phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items" />
+                                <set id="comment" appearance="title" label-id="comment" label="comment" />
+
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drc:nom" label="nom"  set="NomPrenom"/>
+                                <field id="drc:prenom" label="prenom" set="NomPrenom"/>
+                                <field id="drc:telephone" label="telephone" set="codeNumero"/>
+                                <field id="drc:code" label="code" set="codeNumero"/>
+                                <field id="drc:cin" label="cin" set="codeNumero"/>
+                                <field id="drc:adresse" label="adresse" set="AdresseCodepostaleVille"/>
+                                <field id="drc:codepostale" label="codepostale" set="AdresseCodepostaleVille"/>
+                                <field id="drc:ville" label="ville" set="AdresseCodepostaleVille"/>
+                                <field id="drc:gouvernorat" label="gouvernorat" set="GouvernoratPays"/>
+                                <field id="drc:pays" label="pays" set="GouvernoratPays"/>
+                                <field id="drc:raisonSociale" label="raisonsociale" set="RaisonsocialeIdentifiant"/>
+                                <field id="drc:identifiant" label="identifiant" set="RaisonsocialeIdentifiant"/>
+                                <field id="drc:montantDeCreance" label="montant de creance" set="MontantInteretFrais"/>
+                                <field id="drc:interetDeRetard" label="interet de retard" set="MontantInteretFrais" />
+                                <field id="drc:fraidDeDossier" label="frais de dossier" set="MontantInteretFrais"/>
+                                <field id="drc:phase" label="phase" set="phase" />
+                                <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+                                <field id="packageItems" set="items" >
+
+                                </field>
+                                <field id="bpm:comment" set="comment"/>
+
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drc:verifierdossier">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drc:nom" />
+                                <show id="drc:prenom" />
+                                <show id="drc:telephone" />
+                                <show id="drc:code" />
+                                <show id="drc:cin" />
+                                <show id="drc:adresse" />
+                                <show id="drc:codepostale" />
+                                <show id="drc:ville" />
+                                <show id="drc:gouvernorat" />
+                                <show id="drc:pays" />
+                                <show id="drc:raisonSociale" />
+                                <show id="drc:identifiant" />
+                                <show id="drc:montantDeCreance" />
+                                <show id="drc:interetDeRetard" />
+                                <show id="drc:fraidDeDossier" />
+                                <show id="drc:phase" />
+                                <show id="bpm:workflowDescription" />
+                                <show id="packageItems" />
+                                <show id="bpm:comment" />
+                                <show id="bpm:status" />
+                                <show id="drc:verifierdossierOutcome" />
+                            </field-visibility>
+                            <appearance>
+                                <set id="NomPrenom" appearance="title" template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="code, numero et cin"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="adresse , code postale et ville"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="gouvernorat et pays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+                                <set id="phase" appearance="title" label="phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items" />
+                                <set id="comment" appearance="title" label-id="comment" label="comment" />
+
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+
+                                <field id="bpm:status" set="progress" />
+
+                                <field id="drc:nom" label="nom"  set="NomPrenom"/>
+                                <field id="drc:prenom" label="prenom" set="NomPrenom"/>
+                                <field id="drc:telephone" label="telephone" set="codeNumero"/>
+                                <field id="drc:cin" label="cin" set="codeNumero"/>
+                                <field id="drc:code" label="code" set="codeNumero"/>
+                                <field id="drc:adresse" label="adresse" set="AdresseCodepostaleVille"/>
+                                <field id="drc:codepostale" label="codepostale" set="AdresseCodepostaleVille"/>
+                                <field id="drc:ville" label="ville" set="AdresseCodepostaleVille"/>
+                                <field id="drc:gouvernorat" label="gouvernorat" set="GouvernoratPays"/>
+                                <field id="drc:pays" label="pays" set="GouvernoratPays"/>
+                                <field id="drc:raisonSociale" label="raisonsociale" set="RaisonsocialeIdentifiant"/>
+                                <field id="drc:identifiant" label="identifiant" set="RaisonsocialeIdentifiant"/>
+                                <field id="drc:montantDeCreance" label="montant de creance" set="MontantInteretFrais"/>
+                                <field id="drc:interetDeRetard" label="interet de retard" set="MontantInteretFrais" />
+                                <field id="drc:fraidDeDossier" label="frais de dossier" set="MontantInteretFrais"/>
+                                <field id="drc:phase" label="phase" set="phase" />
+                                <field id="bpm:comment" set="comment"/>
+                                <field id="drc:verifierdossierOutcome" label-id="workflow.field.outcome"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl" />
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drc:affecterdossier">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drc:nom" />
+                                <show id="drc:prenom" />
+                                <show id="drc:telephone" />
+                                <show id="drc:code" />
+                                <show id="drc:cin" />
+                                <show id="drc:adresse" />
+                                <show id="drc:codepostale" />
+                                <show id="drc:ville" />
+                                <show id="drc:gouvernorat" />
+                                <show id="drc:pays" />
+                                <show id="drc:raisonSociale" />
+                                <show id="drc:identifiant" />
+                                <show id="drc:montantDeCreance" />
+                                <show id="drc:interetDeRetard" />
+                                <show id="drc:fraidDeDossier" />
+                                <show id="drc:phase" />
+                                <show id="packageItems" />
+                                <show id="bpm:comment" />
+                                <show id="drc:agent" />
+                                <show id="drc:transitionOutcome" />
+                            </field-visibility>
+                            <appearance>
+
+                                <set id="NomPrenom" appearance="title" template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="code, numero et cin"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="adresse , code postale et ville"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="gouvernorat et pays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+                                <set id="phase" appearance="title" label="phase"/>
+                                <set id="agent" appearance="title" label="affecter un agent"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment" />
+                                <set id="items" appearance="title" label-id="items" label="items" />
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+
+
+                                <field id="drc:nom" label="nom"  set="NomPrenom" read-only="true"/>
+                                <field id="drc:prenom" label="prenom" set="NomPrenom" read-only="true"/>
+                                <field id="drc:telephone" label="telephone" set="codeNumero" read-only="true"/>
+                                <field id="drc:code" label="code" set="codeNumero" read-only="true"/>
+                                <field id="drc:cin" label="cin" set="codeNumero"/>
+                                <field id="drc:adresse" label="adresse" set="AdresseCodepostaleVille" read-only="true"/>
+                                <field id="drc:codepostale" label="codepostale" set="AdresseCodepostaleVille" read-only="true"/>
+                                <field id="drc:ville" label="ville" set="AdresseCodepostaleVille" read-only="true"/>
+                                <field id="drc:gouvernorat" label="gouvernorat" set="GouvernoratPays" read-only="true"/>
+                                <field id="drc:pays" label="pays" set="GouvernoratPays" read-only="true"/>
+                                <field id="drc:raisonSociale" label="raisonsociale" set="RaisonsocialeIdentifiant" read-only="true"/>
+                                <field id="drc:identifiant" label="identifiant" set="RaisonsocialeIdentifiant" read-only="true"/>
+                                <field id="drc:montantDeCreance" label="montant de creance" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:interetDeRetard" label="interet de retard" set="MontantInteretFrais" read-only="true" />
+                                <field id="drc:fraidDeDossier" label="frais de dossier" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:phase" label="phase" set="phase" read-only="true"/>
+                                <field id="bpm:comment" set="comment"/>
+                                <field id="drc:agent" label="affecter un agent" label-id="workflow.field.outcome" set="agent"/>
+                                <field id="drc:transitionOutcome" label-id="workflow.field.outcome"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl" />
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drc:signalerdossier">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drc:nom" />
+                                <show id="drc:prenom" />
+                                <show id="drc:telephone" />
+                                <show id="drc:code" />
+                                <show id="drc:cin" />
+                                <show id="drc:adresse" />
+                                <show id="drc:codepostale" />
+                                <show id="drc:ville" />
+                                <show id="drc:gouvernorat" />
+                                <show id="drc:pays" />
+                                <show id="drc:raisonSociale" />
+                                <show id="drc:identifiant" />
+                                <show id="drc:montantDeCreance" />
+                                <show id="drc:interetDeRetard" />
+                                <show id="drc:fraidDeDossier" />
+                                <show id="drc:phase" />
+                                <show id="packageItems" />
+                                <show id="bpm:comment" />
+                                <show id="drc:transitionOutcome" />
+                            </field-visibility>
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title" template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="code, numero et cin"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="adresse , code postale et ville"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="gouvernorat et pays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+                                <set id="phase" appearance="title" label="phase"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment" />
+                                <set id="items" appearance="title" label-id="items" label="items" />
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+
+
+                                <field id="drc:nom" label="nom"  set="NomPrenom" read-only="true"/>
+                                <field id="drc:prenom" label="prenom" set="NomPrenom" read-only="true"/>
+                                <field id="drc:telephone" label="telephone" set="codeNumero" read-only="true"/>
+                                <field id="drc:code" label="code" set="codeNumero"/>
+                                <field id="drc:cin" label="cin" set="codeNumero"/>
+                                <field id="drc:adresse" label="adresse" set="AdresseCodepostaleVille" read-only="true"/>
+                                <field id="drc:codepostale" label="codepostale" set="AdresseCodepostaleVille" read-only="true"/>
+                                <field id="drc:ville" label="ville" set="AdresseCodepostaleVille" read-only="true"/>
+                                <field id="drc:gouvernorat" label="gouvernorat" set="GouvernoratPays" read-only="true"/>
+                                <field id="drc:pays" label="pays" set="GouvernoratPays" read-only="true"/>
+                                <field id="drc:raisonSociale" label="raisonsociale" set="RaisonsocialeIdentifiant" read-only="true"/>
+                                <field id="drc:identifiant" label="identifiant" set="RaisonsocialeIdentifiant" read-only="true"/>
+                                <field id="drc:montantDeCreance" label="montant de creance" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:interetDeRetard" label="interet de retard" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:fraidDeDossier" label="frais de dossier" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:phase" label="phase" set="phase" read-only="true"/>
+                                <field id="bpm:comment" set="comment"/>
+                                <field id="drc:transitionOutcome" label-id="workflow.field.outcome"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl" />
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drc:receptiondossier">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drc:nom" />
+                                <show id="drc:prenom" />
+                                <show id="drc:telephone" />
+                                <show id="drc:code" />
+                                <show id="drc:cin" />
+                                <show id="drc:adresse" />
+                                <show id="drc:codepostale" />
+                                <show id="drc:ville" />
+                                <show id="drc:gouvernorat" />
+                                <show id="drc:pays" />
+                                <show id="drc:raisonSociale" />
+                                <show id="drc:identifiant" />
+                                <show id="drc:montantDeCreance" />
+                                <show id="drc:interetDeRetard" />
+                                <show id="drc:fraidDeDossier" />
+                                <show id="drc:phase" />
+                                <show id="packageItems" />
+                                <show id="bpm:comment" />
+
+                                <show id="drc:directionDossierOutcome" />
+                            </field-visibility>
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title" template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="code, numero et cin"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="adresse , code postale et ville"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="gouvernorat et pays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+                                <set id="phase" appearance="title" label="phase"/>
+                                <set id="comment" appearance="title" label="commentaire"/>
+                                <set id="items" appearance="title" label-id="items" label="items" />
+                                <set id="directionDossier" appearance="title" label-id="directionDossier" label="directionDossier"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+
+
+                                <field id="bpm:comment" set="comment"/>
+                                <field id="drc:nom" label="nom"  set="NomPrenom"/>
+                                <field id="drc:prenom" label="prenom" set="NomPrenom"/>
+                                <field id="drc:telephone" label="telephone" set="codeNumero"/>
+                                <set id="cin" appearance="title" label="codeNumero"/>
+                                <field id="drc:code" label="code" set="codeNumero"/>
+                                <field id="drc:adresse" label="adresse" set="AdresseCodepostaleVille"/>
+                                <field id="drc:codepostale" label="codepostale" set="AdresseCodepostaleVille"/>
+                                <field id="drc:ville" label="ville" set="AdresseCodepostaleVille"/>
+                                <field id="drc:gouvernorat" label="gouvernorat" set="GouvernoratPays"/>
+                                <field id="drc:pays" label="pays" set="GouvernoratPays"/>
+                                <field id="drc:raisonSociale" label="raisonsociale" set="RaisonsocialeIdentifiant"/>
+                                <field id="drc:identifiant" label="identifiant" set="RaisonsocialeIdentifiant"/>
+                                <field id="drc:montantDeCreance" label="montant de creance" set="MontantInteretFrais"/>
+                                <field id="drc:interetDeRetard" label="interet de retard" set="MontantInteretFrais" />
+                                <field id="drc:fraidDeDossier" label="frais de dossier" set="MontantInteretFrais"/>
+                                <field id="drc:phase" label="phase" set="phase" />
+                                <field id="drc:directionDossierOutcome" label-id="workflow.field.outcome"
+                                       set="directionDossier">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl" />
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drc:envoiDeMessage">
+                    <forms>
+                        <form>
+                            <field-visibility>
+                                <show id="drc:textsms"/>
+                                <show id="drc:nom" />
+                                <show id="drc:prenom" />
+                                <show id="drc:telephone" />
+                                <show id="drc:cin" />
+                                <show id="drc:identifiant" />
+                                <show id="drc:montantDeCreance" />
+                                <show id="drc:interetDeRetard" />
+                                <show id="drc:fraidDeDossier" />
+                                <show id="packageItems" />
+                                <show id="bpm:comment"/>
+                                <show id="drc:transitionOutcome" />
+                            </field-visibility>
+                            <appearance>
+
+
+
+                                <set id="NomPrenom" appearance="title" template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="code, numero et cin"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+                                <set id="comment" appearance="title" label="commentaire"/>
+                                <set id="sms" appearance="title" label="sms"/>
+                                <set id="items" appearance="title" label-id="items" label="items" />
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drc:textsms" set="sms" label="sms text">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="bpm:comment" set="comment" label="comment"/>
+                                <field id="drc:nom" label="nom"  set="NomPrenom"/>
+                                <field id="drc:prenom" label="prenom" set="NomPrenom"/>
+                                <field id="drc:telephone" label="telephone" set="codeNumero"/>
+                                <field id="drc:cin" label="cin" set="codeNumero"/>
+                                <field id="drc:identifiant" label="identifiant" set="RaisonsocialeIdentifiant"/>
+                                <field id="drc:montantDeCreance" label="montant de creance" set="MontantInteretFrais"/>
+                                <field id="drc:interetDeRetard" label="interet de retard" set="MontantInteretFrais" />
+                                <field id="drc:fraidDeDossier" label="frais de dossier" set="MontantInteretFrais"/>
+
+                                <field id="drc:transitionOutcome" label-id="workflow.field.outcome"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl" />
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drc:verificationDePaiement">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drc:nom" />
+                                <show id="drc:prenom" />
+                                <show id="drc:telephone" />
+                                <show id="drc:cin" />
+                                <show id="drc:identifiant" />
+                                <show id="drc:montantDeCreance" />
+                                <show id="drc:interetDeRetard"/>
+                                <show id="drc:fraidDeDossier"/>
+                                <show id="bpm:comment"/>
+                                <show id="drc:textsms"/>
+                                <show id="drc:sentsms"/>
+                                <show id="packageItems" />
+                                <show id="drc:verifierpaiementOutcome" />
+                            </field-visibility>
+                            <appearance>
+
+                                <set id="NomPrenom" appearance="title" template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="code, numero et cin"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+                                <set id="items" appearance="title" label-id="items" label="items" />
+                                <set id="sms" appearance="title" label="sms"/>
+                                <set id="sentsms" appearance="title" label="sent sms date"/>
+                                <set id="comment" appearance="title" label="comment"/>
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+
+
+
+                                <field id="bpm:comment" set="comment" label="comment" read-only="true"/>
+                                <field id="drc:textsms" set="sms" label="sms text" read-only="true">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+                                <field id="drc:sentsms" read-only="true" />
+                                <field id="drc:nom" label="nom"  set="NomPrenom" read-only="true"/>
+                                <field id="drc:prenom" label="prenom" set="NomPrenom" read-only="true"/>
+                                <field id="drc:telephone" label="telephone" set="codeNumero" read-only="true"/>
+                                <field id="drc:cin" label="cin" set="codeNumero"/>
+                                <field id="drc:identifiant" label="identifiant" set="RaisonsocialeIdentifiant" read-only="true"/>
+                                <field id="drc:montantDeCreance" label="montant de creance" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:interetDeRetard" label="interet de retard" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:fraidDeDossier" label="frais de dossier" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:sentsms" label="sent sms date" set="sentsms" read-only="true"/>
+                                <field id="drc:verifierpaiementOutcome" label-id="workflow.field.outcome"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl" />
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drc:appeldedebiteur">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drc:nom" />
+                                <show id="drc:prenom" />
+                                <show id="drc:telephone" />
+                                <show id="drc:cin" />
+                                <show id="drc:identifiant" />
+                                <show id="drc:montantDeCreance" />
+                                <show id="drc:interetDeRetard"/>
+                                <show id="drc:fraidDeDossier"/>
+                                <show id="bpm:comment"/>
+                                <show id="drc:textsms"/>
+                                <show id="drc:sentsms"/>
+                                <show id="drc:commentaireagent"/>
+
+                                <show id="packageItems" />
+
+                                <show id="drc:appelDebiteurOutcome" />
+                            </field-visibility>
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title" template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="code, numero et cin"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+                                <set id="comment" appearance="title" label="commentaire"/>
+                                <set id="sms" appearance="title" label="sms"/>
+                                <set id="sentsms" appearance="title" label="sent sms date"/>
+                                <set id="commentaireagent" appearance="title" label="commentaire agent"/>
+                                <set id="items" appearance="title" label-id="items" label="items" />
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+
+
+                                <field id="drc:textsms" set="sms" label="sms text" read-only="true">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+                                <field id="drc:sentsms" set="sentsms" read-only="true" />
+                                <field id="drc:commentaireagent" set="commentaireagent" />
+                                <field id="bpm:comment" set="comment" label="comment" read-only="true"/>
+
+                                <field id="drc:nom" label="nom"  set="NomPrenom" read-only="true"/>
+                                <field id="drc:prenom" label="prenom" set="NomPrenom" read-only="true"/>
+                                <field id="drc:telephone" label="telephone" set="codeNumero" read-only="true"/>
+                                <field id="drc:cin" label="cin" set="codeNumero"/>
+                                <field id="drc:identifiant" label="identifiant" set="RaisonsocialeIdentifiant" read-only="true"/>
+                                <field id="drc:montantDeCreance" label="montant de creance" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:interetDeRetard" label="interet de retard" set="MontantInteretFrais" read-only="true"/>
+                                <field id="drc:fraidDeDossier" label="frais de dossier" set="MontantInteretFrais" read-only="true"/>
+
+                                <field id="drc:appelDebiteurOutcome" label-id="workflow.field.outcome"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl" />
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+            </configurations>
+        </module>
+    </modules>
+</extension>

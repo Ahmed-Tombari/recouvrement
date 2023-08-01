@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0" name="rcm:rcmouvrementCM">
+    <author>NT</author>
+    <imports>
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+    </imports>
+    <namespaces>
+        <namespace uri="http://www.addinn.com/model/recouvrementCM/1.0" prefix="rcm"/>
+    </namespaces>
+    <data-types/>
+    <constraints/>
+    <types>
+        <type name="rcm:dossier">
+            <title>Dossier</title>
+            <parent>cm:folder</parent>
+            <properties>
+                <property name="rcm:numeroDossier">
+                    <title>Numéro dossier</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>false</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="rcm:phase">
+                    <title>Phase</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>true</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                    <constraints>
+                        <constraint name="rcm:LIST_Phases" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Amiable</value>
+                                    <value>Précontentieuse</value>
+                                    <value>Judiciaire</value>
+                                </list>
+                            </parameter>
+                            <parameter name="sorted">
+                                <value>false</value>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="rcm:montant">
+                    <title>Montant</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>false</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="rcm:NomPrenomDebuter">
+                    <title>Nom prénom débuter </title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>false</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </type>
+    </types>
+    <aspects/>
+</model>

@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="PhasePrecontentieuse" name="PhasePrecontentieuse" isExecutable="true">
+    <userTask id="usertask1" name="communication avec le huissier notaire" activiti:assignee="${drpre_agent}" activiti:formKey="drpre:communicationAvecLeHuissierNotaire">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:statusPrecontentieuse"] = "En cours";
+bpm_package.children[0].save();]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('drpre_communicationAvecLeHuissierNotaireOutcome', task.getVariable('drpre_communicationAvecLeHuissierNotaireOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="usertask4" name="Verification de paiement" activiti:assignee="${drpre_agent}" activiti:formKey="drpre:verificationDePaiement">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('drpre_verifierpaiementOutcome', task.getVariable('drpre_verifierpaiementOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow4" name="Lettre recue" sourceRef="exclusivegateway1" targetRef="usertask4">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drpre_communicationAvecLeHuissierNotaireOutcome == 'lettre recue'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask5" name="Signaler dossier" activiti:assignee="${drpre_agent}" activiti:formKey="drpre:signalerDossier">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:etat"] = "Incomplet";
+bpm_package.children[0].properties["drccf:statusPrecontentieuse"] = "Signalé";
+bpm_package.children[0].save();]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[var signaler = bpm_package.children[0].parent.parent.childByNamePath("SIGNALE");
+var dossier = bpm_package.children[0];
+
+dossier.move(signaler);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <endEvent id="endevent1" name="Fin du process">
+      <extensionElements>
+        <activiti:executionListener event="end" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[function main() {
+	var wfName = "PhaseContentieuse";
+      var wfdef = workflow.getDefinitionByName("activiti$"+wfName);
+
+			 var wfparams = new Object();
+			 wfparams["bpm:workflowDescription"] = "workflow de " + bpm_package.children[0].properties["drct:nom"];
+			 wfparams["drct:nom"] = bpm_package.children[0].properties["drct:nom"];
+			 wfparams["drct:prenom"] =bpm_package.children[0].properties["drct:prenom"];
+			 wfparams["drct:telephone"] = bpm_package.children[0].properties["drct:telephone"];
+			 wfparams["drct:code"] = bpm_package.children[0].properties["drct:code"];
+                      wfparams["drct:cin"] = bpm_package.children[0].properties["drct:cin"];
+			 wfparams["drct:adresse"] = bpm_package.children[0].properties["drct:adresse"];
+			 wfparams["drct:codepostale"] = bpm_package.children[0].properties["drct:codepostale"];
+			 wfparams["drct:ville"] = bpm_package.children[0].properties["drct:ville"];
+			 wfparams["drct:gouvernorat"] = bpm_package.children[0].properties["drct:gouvernorat"];
+			 wfparams["drct:raisonSociale"] = bpm_package.children[0].properties["drct:raisonSociale"];
+	 		 wfparams["drct:identifiant"] = bpm_package.children[0].properties["drct:identifiant"];
+		 	 wfparams["drct:montantDeCreance"] = bpm_package.children[0].properties["drct:montantDeCreance"];
+			 wfparams["drct:interetDeRetard"] = bpm_package.children[0].properties["drct:interetDeRetard"];
+			 wfparams["drct:fraidDeDossier"] = bpm_package.children[0].properties["drct:fraidDeDossier"];
+			 wfparams["drct:phase"] =bpm_package.children[0].properties["drct:phase"];
+
+
+			 wfparams["drct:natureDeLaCreance"] = bpm_package.children[0].properties["drct:natureDeLaCreance"];
+			 wfparams["drct:garant"] = bpm_package.children[0].properties["drct:garant"];
+
+			 wfparams["drct:creances"] = bpm_package.children[0].properties["drct:creances"];
+			 wfparams["drct:montantDeLaCreance"] = bpm_package.children[0].properties["drct:montantDeLaCreance"];
+			 wfparams["drct:nature"] = bpm_package.children[0].properties["drct:nature"];
+			 wfparams["drct:date"] = bpm_package.children[0].properties["drct:date"];
+
+			 wfparams["drct:dateDeVersement"] = bpm_package.children[0].properties["drct:dateDeVersement"];
+			 wfparams["drct:montantDeVersement"] = bpm_package.children[0].properties["drct:montantDeVersement"];
+			 wfparams["drct:modeDeReglement"] = bpm_package.children[0].properties["drct:modeDeReglement"];
+	 		 wfparams["drct:affectation"] = bpm_package.children[0].properties["drct:affectation"];
+
+
+		 	 wfparams["drct:type"] = bpm_package.children[0].properties["drct:type"];
+			 wfparams["drct:natureDeLHypothequeEnquetes"] = bpm_package.children[0].properties["drct:natureDeLHypothequeEnquetes"];
+			 wfparams["drct:Rang"] = bpm_package.children[0].properties["drct:Rang"];
+			 wfparams["drct:immatriculation"] = bpm_package.children[0].properties["drct:immatriculation"];
+			 wfparams["drct:dateFinDeLHypotheque"] = bpm_package.children[0].properties["drct:dateFinDeLHypotheque"];
+			 wfparams["drct:montantDeLHypotheque"] = bpm_package.children[0].properties["drct:montantDeLHypotheque"];
+			 wfparams["drct:Valeure"] = bpm_package.children[0].properties["drct:Valeure"];
+
+			 wfparams["drct:nomDeSaisine"] = bpm_package.children[0].properties["drct:nomDeSaisine"];
+			 wfparams["drct:region"] = bpm_package.children[0].properties["drct:region"];
+			 wfparams["drct:typeDeTiers"] = bpm_package.children[0].properties["drct:typeDeTiers"];
+			 wfparams["drct:nomDeTiers"] = bpm_package.children[0].properties["drct:nomDeTiers"];
+
+			 wfparams["drct:natureDuFrais"] = bpm_package.children[0].properties["drct:natureDuFrais"];
+			 wfparams["drct:typeDuFrais"] = bpm_package.children[0].properties["drct:typeDuFrais"];
+			 wfparams["drct:tiers"] = bpm_package.children[0].properties["drct:tiers"];
+			 wfparams["drct:montantsDesFrais"] = bpm_package.children[0].properties["drct:montantsDesFrais"];
+			 wfparams["drct:dateDEffetDesIr"] = bpm_package.children[0].properties["drct:dateDEffetDesIr"];
+			 wfparams["drct:agent"] = bpm_package.children[0].properties["drccf:agent"];
+
+
+wfparams["drct:regionAvocat"] = bpm_package.children[0].properties["drct:regionAvocat"];
+			 wfparams["drct:avocatAvocat"] = bpm_package.children[0].properties["drct:avocatAvocat"];
+			 wfparams["drct:regionHuissier"] = bpm_package.children[0].properties["drct:regionHuissier"];
+			 wfparams["drct:avocatHuissier"] = bpm_package.children[0].properties["drct:avocatHuissier"];
+			 wfparams["drct:regionExpert"] = bpm_package.children[0].properties["drct:regionExpert"];
+			 wfparams["drct:avocatExpert"] = bpm_package.children[0].properties["drct:avocatExpert"];
+
+			 wfparams["bpm:comment"] = "c'est le dossier de Monsieur " + bpm_package.children[0].properties["drct:nom"];
+
+
+			 var wfpackage = workflow.createPackage();
+			
+
+			 wfpackage.addNode(bpm_package.children[0]);
+			 wfdef.startWorkflow(wfpackage, wfparams);
+
+        
+	logger.system.out(" phase precontentieuse initier avec succée ");
+logger.system.out(" etat " + bpm_package.children[0].properties["drccf:statusAmiable"]);
+logger.system.out(" etat " + bpm_package.children[0].properties["drccf:statusPrecontentieuse"]);
+logger.system.out(" etat " + bpm_package.children[0].properties["drccf:phase"]);
+}
+if(bpm_package.children[0].properties["drccf:statusPrecontentieuse"] == "En cours" && bpm_package.children[0].properties["drccf:payee"] == false){
+
+	bpm_package.children[0].properties["drccf:statusContentieuse"] = "Affecté";
+	bpm_package.children[0].properties["drccf:statusPrecontentieuse"] = "Traité";
+	bpm_package.children[0].properties["drccf:phase"] = "Judiciaire";
+       bpm_package.children[0].save();
+main();
+
+}]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="flow6" sourceRef="usertask5" targetRef="endevent1"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow7" sourceRef="usertask4" targetRef="exclusivegateway2"></sequenceFlow>
+    <userTask id="usertask6" name="Validation paiement" activiti:assignee="${drpre_agent}" activiti:formKey="drpre:validationDePaiement">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:statusPrecontentieuse"] = "Traité";
+bpm_package.children[0].properties["drccf:payee"] = true;
+bpm_package.children[0].save();]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[var valide = bpm_package.children[0].parent.parent.childByNamePath("VALIDE");
+var dossier = bpm_package.children[0];
+
+dossier.move(valide);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow8" name="Paye" sourceRef="exclusivegateway2" targetRef="usertask6">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drpre_verifierpaiementOutcome == 'Paye'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow10" sourceRef="usertask6" targetRef="endevent1"></sequenceFlow>
+    <userTask id="usertask8" name="Verification dossier" activiti:assignee="${drpre_agent}" activiti:formKey="drpre:verifierdossier">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('drpre_verifierdossierOutcome', task.getVariable('drpre_verifierdossierOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:etat"] = "Complet";
+bpm_package.children[0].save();]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow12" sourceRef="usertask8" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="flow13" name="complet" sourceRef="exclusivegateway3" targetRef="usertask1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drpre_verifierdossierOutcome == 'complet'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask9" name="Alimentation dossier" activiti:assignee="${drpre_agent}" activiti:formKey="drpre:alimentationDossier">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('drpre_alimentationDossierOutcome', task.getVariable('drpre_alimentationDossierOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:etat"] = "Incomplet";
+bpm_package.children[0].save();
+logger.system.out(" etat " + bpm_package.children[0].properties["drccf:etat"]);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow14" name="incomplet" sourceRef="exclusivegateway3" targetRef="usertask9">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drpre_verifierdossierOutcome == 'incomplet'}]]></conditionExpression>
+    </sequenceFlow>
+    <startEvent id="startevent1" name="Start" activiti:initiator="${drpre_agent}" activiti:formKey="drpre:dossier"></startEvent>
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow15" sourceRef="usertask9" targetRef="exclusivegateway4"></sequenceFlow>
+    <sequenceFlow id="flow16" sourceRef="startevent1" targetRef="usertask8"></sequenceFlow>
+    <sequenceFlow id="flow17" name="complet" sourceRef="exclusivegateway4" targetRef="usertask8">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drpre_alimentationDossierOutcome == 'complet'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow18" name="incomplet" sourceRef="exclusivegateway4" targetRef="usertask5">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drpre_alimentationDossierOutcome == 'incomplet'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow19" name="Lettre non recue" sourceRef="exclusivegateway1" targetRef="usertask5">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drpre_communicationAvecLeHuissierNotaireOutcome == 'lettre non recue'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow20" sourceRef="usertask1" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow21" name="Non Paye" sourceRef="exclusivegateway2" targetRef="endevent1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drpre_verifierpaiementOutcome == 'Non Paye'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_PhasePrecontentieuse">
+    <bpmndi:BPMNPlane bpmnElement="PhasePrecontentieuse" id="BPMNPlane_PhasePrecontentieuse">
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="61.0" width="105.0" x="420.0" y="240.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="870.0" y="251.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask4" id="BPMNShape_usertask4">
+        <omgdc:Bounds height="58.0" width="105.0" x="1004.0" y="240.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask5" id="BPMNShape_usertask5">
+        <omgdc:Bounds height="55.0" width="105.0" x="838.0" y="20.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1550.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="1154.0" y="250.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask6" id="BPMNShape_usertask6">
+        <omgdc:Bounds height="55.0" width="105.0" x="1289.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask8" id="BPMNShape_usertask8">
+        <omgdc:Bounds height="55.0" width="105.0" x="110.0" y="244.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="290.0" y="251.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask9" id="BPMNShape_usertask9">
+        <omgdc:Bounds height="55.0" width="105.0" x="114.0" y="106.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1.0" y="254.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway4" id="BPMNShape_exclusivegateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="34.0" y="113.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="910.0" y="271.0"></omgdi:waypoint>
+        <omgdi:waypoint x="983.0" y="271.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1004.0" y="269.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="59.0" x="910.0" y="278.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="943.0" y="47.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1567.0" y="47.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1567.0" y="170.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="1109.0" y="269.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1154.0" y="270.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="1174.0" y="250.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1174.0" y="187.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1289.0" y="187.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="1190.0" y="192.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="1394.0" y="187.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1550.0" y="187.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="215.0" y="271.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="271.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="330.0" y="271.0"></omgdi:waypoint>
+        <omgdi:waypoint x="420.0" y="270.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="37.0" x="339.0" y="278.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="310.0" y="251.0"></omgdi:waypoint>
+        <omgdi:waypoint x="310.0" y="133.0"></omgdi:waypoint>
+        <omgdi:waypoint x="219.0" y="133.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="45.0" x="321.0" y="192.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="114.0" y="133.0"></omgdi:waypoint>
+        <omgdi:waypoint x="74.0" y="133.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow16" id="BPMNEdge_flow16">
+        <omgdi:waypoint x="36.0" y="271.0"></omgdi:waypoint>
+        <omgdi:waypoint x="110.0" y="271.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="54.0" y="153.0"></omgdi:waypoint>
+        <omgdi:waypoint x="54.0" y="213.0"></omgdi:waypoint>
+        <omgdi:waypoint x="164.0" y="213.0"></omgdi:waypoint>
+        <omgdi:waypoint x="162.0" y="244.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="37.0" x="64.0" y="190.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="54.0" y="113.0"></omgdi:waypoint>
+        <omgdi:waypoint x="54.0" y="47.0"></omgdi:waypoint>
+        <omgdi:waypoint x="838.0" y="47.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="45.0" x="64.0" y="51.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="890.0" y="251.0"></omgdi:waypoint>
+        <omgdi:waypoint x="890.0" y="75.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="80.0" x="895.0" y="161.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="525.0" y="270.0"></omgdi:waypoint>
+        <omgdi:waypoint x="870.0" y="271.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow21" id="BPMNEdge_flow21">
+        <omgdi:waypoint x="1194.0" y="270.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1567.0" y="270.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1567.0" y="205.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="46.0" x="1194.0" y="270.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

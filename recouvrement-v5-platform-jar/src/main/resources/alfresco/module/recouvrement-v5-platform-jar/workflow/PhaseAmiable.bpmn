@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="PhaseAmiable" name="PhaseAmiable" isExecutable="true">
+    <startEvent id="start" name="Dossier Reçu" activiti:initiator="${initiator.properties.userName}" activiti:formKey="drc:dossier"></startEvent>
+    <userTask id="verification" name="Verification dossier" activiti:assignee="${initiator.properties.userName}" activiti:formKey="drc:verifierdossier">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('drc_verifierdossierOutcome', task.getVariable('drc_verifierdossierOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[/*var FTL_EMAIL_WF_DOCUMENT_DISPONIBLE_SIGNATURE = "/app:company_home/app:dictionary/app:email_templates/cm:recouvrement/cm:template_taches_dossier.html.ftl";
+var EMAIL_FROM = "salim.brahim@esprit.tn";
+var SUBJECT_DOSSIER_A_VALIDER = "[Recouvrement] Demande de validation du dossier de recouvrement";
+
+
+
+ 
+ 
+function sendMail(to, subject, FTL_EMAIL, toMany) {
+
+   logger.system.out("SEND EMAIL Task name :"+ task.name);
+
+   logger.system.out("EMAIL TO :"+ to);
+   logger.system.out("EMAIL subject :"+ subject);
+   logger.system.out("EMAIL FTL_EMAIL :"+ FTL_EMAIL);
+   logger.system.out("EMAIL toMany :"+ toMany);
+  
+   
+   var mail = actions.create("mail");
+   if(toMany)
+   {
+      mail.parameters.to_many = to;
+       var nodeGroupe = people.getGroup(to);
+            var members = people.getMembers(nodeGroupe, false);
+            for each(var member in members) {
+                logger.system.out("EMAIL TO member :"+ member.properties["cm:email"]);
+            }
+   }
+   else
+{
+      mail.parameters.to = to;
+   }
+   mail.parameters.subject = subject;
+   mail.parameters.from = "salim.brahim@esprit.tn";
+   //mail.parameters.text = "Test";
+mail.parameters.ignore_send_failure = true;
+   var tmpl = companyhome.childrenByXPath(FTL_EMAIL)[0];
+   mail.parameters.template = tmpl;
+   var templateArgs = new Array();
+   templateArgs['workflowTitle'] = task.name;
+   templateArgs['workflowPooled'] = toMany; // true;
+templateArgs['workflowDescription'] = task.description;
+   templateArgs['workflowId'] = "activiti$" + task.id;
+   //templateArgs['numeroDossier'] = dossierIT.properties["it:numeroDossier"];
+   templateArgs['workflowInstanceId'] =execution.getVariable("workflowinstanceid");
+   //templateArgs['siteShortName'] = siteShortName;
+   //bpm_package.setScope(workflow.getScope());
+// templateArgs['workflowDocuments'] = bpm_package.childAssocs["bpm:packageContains"];
+var templateModel = new Array();
+   templateModel['args'] = templateArgs;
+   mail.parameters.template_model = templateModel;
+   mail.executeAsynchronously(tmpl);
+   logger.system.out("SEND EMAIL END" );
+}
+
+ sendMail("salimbrahim44@gmail.com", SUBJECT_DOSSIER_A_VALIDER, FTL_EMAIL_WF_DOCUMENT_DISPONIBLE_SIGNATURE, false);*/]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="runAs">
+            <activiti:string><![CDATA[admin]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow1" sourceRef="verification" targetRef="exclusivegateway1"></sequenceFlow>
+    <userTask id="affecterdossier" name="Affecter dossier à un agent" activiti:assignee="${initiator.properties.userName}" activiti:formKey="drc:affecterdossier">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:etat"] = "Complet";
+bpm_package.children[0].save();
+logger.system.out(" etat " + bpm_package.children[0].properties["drccf:etat"]);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[//execution.setVariable('drc_agent',task.getVariable('drc_agent'));
+var template = companyhome.childrenByXPath("/app:company_home/app:dictionary/cm:Config/*")[0];
+var csv = template;
+
+var Transition = "";
+
+var lines = csv.content.split("\n");
+for (var i = 1; i < lines.length; i++) {
+	var line = lines[i].split(";");
+	var key = line[0];
+	if (key == "com.addinn.recouvrement.notificationMessageAppel") {
+		Transition = line[1] + "";
+  bpm_package.children[0].properties["drccf:typeRelance"] =Transition;
+  bpm_package.children[0].save();
+    logger.system.out(" message" + Transition );
+		break;
+	}
+
+}]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="runAs">
+            <activiti:string><![CDATA[admin]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow2" sourceRef="start" targetRef="verification">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_transitionOutcome == 'suivant'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask3" name="Envoi message de rappel en parallele" activiti:assignee="${drc_agent}" activiti:formKey="drc:envoiDeMessage">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[var date = new Date();
+execution.setVariable('drc_textsms', task.getVariable('drc_textsms'));
+task.setVariable('drc_sentsms', date.toUTCString());]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:statusAmiable"] = "En cours";
+bpm_package.children[0].save();
+var ENCOURS = bpm_package.children[0].parent.parent.childByNamePath("ENCOURS");
+var dossier = bpm_package.children[0];
+
+dossier.move(ENCOURS);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <boundaryEvent id="boundarytimer1" name="Timer" attachedToRef="usertask3" cancelActivity="false">
+      <timerEventDefinition>
+        <timeCycle>R3/P1D</timeCycle>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <userTask id="verificationDePaiement" name="Vertification de paiement" activiti:assignee="${drc_agent}" activiti:formKey="drc:verificationDePaiement">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('drc_verifierpaiementOutcome', task.getVariable('drc_verifierpaiementOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.getVariable('drc_textsms');
+task.getVariable('drc_sentsms');
+execution.getVariable('drc_commentaireagent');
+task.getVariable('drc_commentaireagent');]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="usertask6" name="Validation Paiement" activiti:assignee="${drc_agent}" activiti:formKey="drc:validationDePaiement">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:statusAmiable"] = "Traité";
+bpm_package.children[0].properties["drccf:payee"] = true;
+bpm_package.children[0].save();]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[var valide = bpm_package.children[0].parent.parent.childByNamePath("VALIDE");
+var dossier = bpm_package.children[0];
+
+dossier.move(valide);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="Paye" name="Paye" sourceRef="exclusivegateway3" targetRef="usertask6">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_verifierpaiementOutcome == 'Paye'}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="endevent2" name="Fin du process">
+      <extensionElements>
+        <activiti:executionListener event="end" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[function main() {
+	var wfName = "PhasePrecontentieuse";
+      var wfdef = workflow.getDefinitionByName("activiti$"+wfName);
+
+			 var wfparams = new Object();
+			 wfparams["bpm:workflowDescription"] = "workflow de " + bpm_package.children[0].properties["drct:nom"];
+			 wfparams["drpre:nom"] = bpm_package.children[0].properties["drct:nom"];
+			 wfparams["drpre:prenom"] =bpm_package.children[0].properties["drct:prenom"];
+			 wfparams["drpre:telephone"] = bpm_package.children[0].properties["drct:telephone"];
+			 wfparams["drpre:code"] = bpm_package.children[0].properties["drct:code"];
+                      wfparams["drpre:cin"] = bpm_package.children[0].properties["drct:cin"];
+			 wfparams["drpre:adresse"] = bpm_package.children[0].properties["drct:adresse"];
+			 wfparams["drpre:codepostale"] = bpm_package.children[0].properties["drct:codepostale"];
+			 wfparams["drpre:ville"] = bpm_package.children[0].properties["drct:ville"];
+			 wfparams["drpre:gouvernorat"] = bpm_package.children[0].properties["drct:gouvernorat"];
+			 wfparams["drpre:raisonSociale"] = bpm_package.children[0].properties["drct:raisonSociale"];
+	 		 wfparams["drpre:identifiant"] = bpm_package.children[0].properties["drct:identifiant"];
+		 	 wfparams["drpre:montantDeCreance"] = bpm_package.children[0].properties["drct:montantDeCreance"];
+			 wfparams["drpre:interetDeRetard"] = bpm_package.children[0].properties["drct:interetDeRetard"];
+			 wfparams["drpre:fraidDeDossier"] = bpm_package.children[0].properties["drct:fraidDeDossier"];
+			 wfparams["drpre:phase"] =bpm_package.children[0].properties["drct:phase"];
+
+
+			 wfparams["drpre:natureDeLaCreance"] = bpm_package.children[0].properties["drct:natureDeLaCreance"];
+			 wfparams["drpre:garant"] = bpm_package.children[0].properties["drct:garant"];
+
+			 wfparams["drpre:creances"] = bpm_package.children[0].properties["drct:creances"];
+			 wfparams["drpre:montantDeLaCreance"] = bpm_package.children[0].properties["drct:montantDeLaCreance"];
+			 wfparams["drpre:nature"] = bpm_package.children[0].properties["drct:nature"];
+			 wfparams["drpre:date"] = bpm_package.children[0].properties["drct:date"];
+
+			 wfparams["drpre:dateDeVersement"] = bpm_package.children[0].properties["drct:dateDeVersement"];
+			 wfparams["drpre:montantDeVersement"] = bpm_package.children[0].properties["drct:montantDeVersement"];
+			 wfparams["drpre:modeDeReglement"] = bpm_package.children[0].properties["drct:modeDeReglement"];
+	 		 wfparams["drpre:affectation"] = bpm_package.children[0].properties["drct:affectation"];
+
+
+		 	 wfparams["drpre:type"] = bpm_package.children[0].properties["drct:type"];
+			 wfparams["drpre:natureDeLHypothequeEnquetes"] = bpm_package.children[0].properties["drct:natureDeLHypothequeEnquetes"];
+			 wfparams["drpre:Rang"] = bpm_package.children[0].properties["drct:Rang"];
+			 wfparams["drpre:immatriculation"] = bpm_package.children[0].properties["drct:immatriculation"];
+			 wfparams["drpre:dateFinDeLHypotheque"] = bpm_package.children[0].properties["drct:dateFinDeLHypotheque"];
+			 wfparams["drpre:montantDeLHypotheque"] = bpm_package.children[0].properties["drct:montantDeLHypotheque"];
+			 wfparams["drpre:Valeure"] = bpm_package.children[0].properties["drct:Valeure"];
+
+			 wfparams["drpre:nomDeSaisine"] = bpm_package.children[0].properties["drct:nomDeSaisine"];
+			 wfparams["drpre:region"] = bpm_package.children[0].properties["drct:region"];
+			 wfparams["drpre:typeDeTiers"] = bpm_package.children[0].properties["drct:typeDeTiers"];
+			 wfparams["drpre:nomDeTiers"] = bpm_package.children[0].properties["drct:nomDeTiers"];
+
+			 wfparams["drpre:natureDuFrais"] = bpm_package.children[0].properties["drct:natureDuFrais"];
+			 wfparams["drpre:typeDuFrais"] = bpm_package.children[0].properties["drct:typeDuFrais"];
+			 wfparams["drpre:tiers"] = bpm_package.children[0].properties["drct:tiers"];
+			 wfparams["drpre:montantsDesFrais"] = bpm_package.children[0].properties["drct:montantsDesFrais"];
+			 wfparams["drpre:dateDEffetDesIr"] = bpm_package.children[0].properties["drct:dateDEffetDesIr"];
+			 wfparams["drpre:agent"] = bpm_package.children[0].properties["drccf:agent"];
+
+			 wfparams["bpm:comment"] = "c'est le dossier de Monsieur " + bpm_package.children[0].properties["drct:nom"];
+
+
+			 var wfpackage = workflow.createPackage();
+			
+
+			 wfpackage.addNode(bpm_package.children[0]);
+			 wfdef.startWorkflow(wfpackage, wfparams);
+
+        
+	logger.system.out(" phase precontentieuse initier avec succée ");
+logger.system.out(" etat " + bpm_package.children[0].properties["drccf:statusAmiable"]);
+logger.system.out(" etat " + bpm_package.children[0].properties["drccf:statusPrecontentieuse"]);
+logger.system.out(" etat " + bpm_package.children[0].properties["drccf:phase"]);
+}
+
+
+if(bpm_package.children[0].properties["drccf:statusAmiable"] == "En cours"  &&  bpm_package.children[0].properties["drccf:payee"] == false){
+
+	bpm_package.children[0].properties["drccf:statusAmiable"] = "Traité";
+	bpm_package.children[0].properties["drccf:statusPrecontentieuse"] = "Affecté";
+	bpm_package.children[0].properties["drccf:phase"] = "Précontentieuse";
+bpm_package.children[0].save();
+main();
+
+}]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="flow15" sourceRef="usertask6" targetRef="endevent2"></sequenceFlow>
+    <sequenceFlow id="NonPaye" name="Non Paye" sourceRef="exclusivegateway3" targetRef="endevent2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_verifierpaiementOutcome == 'Non Paye'}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="alfrescoScripttask1" name="Relance des messages" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate"></serviceTask>
+    <serviceTask id="alfrescoScripttask2" name="Relance d'appels" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate"></serviceTask>
+    <sequenceFlow id="flow21" sourceRef="boundarytimer1" targetRef="alfrescoScripttask1"></sequenceFlow>
+    <userTask id="usertask9" name="Signaler dossier" activiti:assignee="${initiator.properties.userName}" activiti:formKey="drc:signalerdossier">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:statusAmiable"] = "Signalé";
+bpm_package.children[0].properties["drccf:etat"] = "Incomplet";
+bpm_package.children[0].save();
+logger.system.out(" status Amiable " + bpm_package.children[0].properties["drccf:statusAmiable"]);
+
+var SIGNALE = bpm_package.children[0].parent.parent.childByNamePath("SIGNALE");
+var dossier = bpm_package.children[0];
+
+dossier.move(SIGNALE);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[var signaler = bpm_package.children[0].parent.parent.childByNamePath("SIGNALE");
+var dossier = bpm_package.children[0];
+
+dossier.move(signaler);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="Rejeter" name="Incomplet" sourceRef="exclusivegateway1" targetRef="usertask9">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_verifierdossierOutcome == 'incomplet'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow27" sourceRef="usertask9" targetRef="endevent2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_transitionOutcome == 'suivant'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="Reception" name="Reception dossier" activiti:assignee="${drc_agent}" activiti:formKey="drc:receptiondossier">
+      <documentation>- le Chargée prend la decision aprés l'etude de dossier de recouvremnt
+
+                - Si En Parallele =&gt; Envoyer message de rappel et appler le debiteur En Parallele
+
+                - Si En Serie =&gt;  Envoyer message de rappel et appler le debiteur En Serie</documentation>
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[<import resource="classpath:alfresco/extension/js/emailServices.js">
+bpm_package.children[0].properties["drccf:statusAmiable"] = "À Faire";
+
+ 
+
+var d = execution.getVariable("drc_agent");
+
+ 
+
+
+bpm_package.children[0].properties["drccf:agent"] = d;
+logger.system.out("agent affectee" + bpm_package.children[0].properties["drccf:agent"]);
+
+ 
+
+bpm_package.children[0].save();
+var email = people.getPerson(d).properties["cm:email"];
+
+ 
+
+var SUBJECT_DOSSIER_A_VALIDER = "[PLATEFORME DE RECOUVREMENT] UN DOSSIER VIENT DE VOUS ETRE ASSIGNE";
+    sendMail(email, SUBJECT_DOSSIER_A_VALIDER, FTL_EMAIL_WF_TACHE, false);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[var template = companyhome.childrenByXPath("/app:company_home/app:dictionary/cm:Config/*")[0];
+var csv = template;
+
+var Transition = "";
+
+var lines = csv.content.split("\n");
+for (var i = 1; i < lines.length; i++) {
+	var line = lines[i].split(";");
+	var key = line[0];
+	if (key == "com.addinn.recouvrement.notificationMessageAppel") {
+		Transition = line[1] + "";
+    execution.setVariable('drc_directionDossierOutcome', Transition);
+    logger.system.out(" message" + Transition );
+		break;
+	}
+
+}]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="runAs">
+            <activiti:string><![CDATA[admin]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow28" sourceRef="affecterdossier" targetRef="Reception">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_transitionOutcome == 'suivant'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow30" sourceRef="verificationDePaiement" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="Valider" name="Complet" sourceRef="exclusivegateway1" targetRef="affecterdossier">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_verifierdossierOutcome == 'complet'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask10" name="Appeler le debiteur en parallele" activiti:assignee="${drc_agent}" activiti:formKey="drc:appeldedebiteur">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('drc_commentaireagent', task.getVariable('drc_commentaireagent'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:statusAmiable"] = "En cours";
+bpm_package.children[0].save();
+var ENCOURS = bpm_package.children[0].parent.parent.childByNamePath("ENCOURS");
+var dossier = bpm_package.children[0];
+
+dossier.move(ENCOURS);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask11" name="Envoi message de rappel en serie" activiti:assignee="${drc_agent}" activiti:formKey="drc:envoiDeMessage">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[var date = new Date();
+execution.setVariable('drc_textsms', task.getVariable('drc_textsms'));
+task.setVariable('drc_sentsms', date.toUTCString());]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="usertask12" name="Appeler le debiteur en serie" activiti:assignee="${drc_agent}" activiti:formKey="drc:appeldedebiteur">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('drc_commentaireagent', task.getVariable('drc_commentaireagent'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[bpm_package.children[0].properties["drccf:statusAmiable"] = "En cours";
+bpm_package.children[0].save();
+var ENCOURS = bpm_package.children[0].parent.parent.childByNamePath("ENCOURS");
+var dossier = bpm_package.children[0];
+
+dossier.move(ENCOURS);]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow38" sourceRef="usertask11" targetRef="verificationDePaiement"></sequenceFlow>
+    <boundaryEvent id="boundarytimer2" name="Timer" attachedToRef="usertask10" cancelActivity="false">
+      <timerEventDefinition>
+        <timeCycle>R3/P1D</timeCycle>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <boundaryEvent id="boundarytimer3" name="Timer" attachedToRef="usertask11" cancelActivity="false">
+      <timerEventDefinition>
+        <timeCycle>R3/P1D</timeCycle>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <boundaryEvent id="boundarytimer4" name="Timer" attachedToRef="usertask12" cancelActivity="false">
+      <timerEventDefinition>
+        <timeCycle>R3/P1D</timeCycle>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway"></exclusiveGateway>
+    <parallelGateway id="parallelgateway1" name="Parallel Gateway"></parallelGateway>
+    <sequenceFlow id="flow45" name="NotificationParallele" sourceRef="exclusivegateway4" targetRef="parallelgateway1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_directionDossierOutcome == 'NotificationParallele'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow46" sourceRef="parallelgateway1" targetRef="usertask10"></sequenceFlow>
+    <sequenceFlow id="flow47" sourceRef="parallelgateway1" targetRef="usertask3"></sequenceFlow>
+    <sequenceFlow id="flow48" sourceRef="usertask3" targetRef="inclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow49" sourceRef="usertask10" targetRef="inclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow50" sourceRef="inclusivegateway1" targetRef="verificationDePaiement"></sequenceFlow>
+    <sequenceFlow id="flow51" name="NotificationSerie" sourceRef="exclusivegateway4" targetRef="usertask12">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${drc_directionDossierOutcome == 'NotificationSerie'}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="alfrescoScripttask3" name="Relance des messages" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate"></serviceTask>
+    <serviceTask id="alfrescoScripttask4" name="Relance d'appels" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate"></serviceTask>
+    <sequenceFlow id="flow55" sourceRef="boundarytimer2" targetRef="alfrescoScripttask2"></sequenceFlow>
+    <sequenceFlow id="flow56" sourceRef="boundarytimer3" targetRef="alfrescoScripttask3"></sequenceFlow>
+    <sequenceFlow id="flow57" sourceRef="boundarytimer4" targetRef="alfrescoScripttask4"></sequenceFlow>
+    <sequenceFlow id="flow58" sourceRef="usertask12" targetRef="usertask11"></sequenceFlow>
+    <sequenceFlow id="flow59" sourceRef="Reception" targetRef="scripttask1"></sequenceFlow>
+    <scriptTask id="scripttask1" name="Message initial" scriptFormat="javascript" activiti:autoStoreVariables="false">
+      <extensionElements>
+        <activiti:executionListener event="start" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[<import resource="classpath:alfresco/extension/js/emailServices.js">
+function main() {
+    var template = companyhome.childrenByXPath("/app:company_home/app:dictionary/cm:Config/*")[0];
+
+
+
+    var csv = template;
+    var message = "";
+    var email = "";
+
+    var lines = csv.content.split("\n");
+    for (var i = 1; i < lines.length; i++) {
+        var line = lines[i].split(";");
+        var key = line[0];
+        if (key == "message.initale") {
+            message = line[1];
+            break;
+        }
+
+    }
+
+    for (var i = 1; i < lines.length; i++) {
+        var line = lines[i].split(";");
+        var key = line[0];
+        if (key == "message.initale.email.debiteur.test") {
+            email = line[1];
+            break;
+        }
+
+    }
+
+
+
+
+    if (message != "" && email != "") {
+
+        var SUBJECT_DOSSIER_A_VALIDER = "[PLATEFORME DE RECOUVREMENT] Message Important !";
+        sendNotification(email, SUBJECT_DOSSIER_A_VALIDER, FTL_EMAIL_WF_NOTIFICATION, false, bpm_package.children[0], message);
+    }
+}
+main();]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="runAs">
+            <activiti:string><![CDATA[admin]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+        <activiti:executionListener event="end" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[var template = companyhome.childrenByXPath("/app:company_home/app:dictionary/cm:Config/*")[0];
+var csv = template;
+
+var decision= "";
+
+var lines = csv.content.split("\n");
+for (var i = 1; i < lines.length; i++) {
+	var line = lines[i].split(";");
+	var key = line[0];
+	if (key == "com.addinn.recouvrement.notificationMessageAppel") {
+		decision = line[1] + "";
+   // execution.setVariable('drc_directionDossierOutcome', decision);
+    logger.system.out(" message" + decision );
+		break;
+	}
+
+}
+if(decision.indexOf("NotificationParallele") != -1){
+execution.setVariable("drc_directionDossierOutcome","NotificationParallele");
+  logger.system.out("drc_directionDossierOutcome ===P==> " + execution.getVariable("drc_directionDossierOutcome") );
+}
+else{
+execution.setVariable("drc_directionDossierOutcome","NotificationSerie");
+ logger.system.out("drc_directionDossierOutcome ===S==> " + execution.getVariable("drc_directionDossierOutcome") );
+}]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+      <script>;</script>
+    </scriptTask>
+    <sequenceFlow id="flow60" sourceRef="scripttask1" targetRef="exclusivegateway4">
+      <extensionElements>
+        <activiti:executionListener event="take" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[logger.system.out(" variable est ------------ >" + execution.getVariable('drc_directionDossierOutcome'));]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="runAs">
+            <activiti:string><![CDATA[admin]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+      </extensionElements>
+    </sequenceFlow>
+    <inclusiveGateway id="inclusivegateway1" name="Inclusive Gateway"></inclusiveGateway>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_PhaseAmiable">
+    <bpmndi:BPMNPlane bpmnElement="PhaseAmiable" id="BPMNPlane_PhaseAmiable">
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="35.0" width="35.0" x="1.0" y="226.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="verification" id="BPMNShape_verification">
+        <omgdc:Bounds height="55.0" width="105.0" x="106.0" y="216.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="251.0" y="223.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="affecterdossier" id="BPMNShape_affecterdossier">
+        <omgdc:Bounds height="63.0" width="106.0" x="340.0" y="212.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask3" id="BPMNShape_usertask3">
+        <omgdc:Bounds height="63.0" width="105.0" x="780.0" y="302.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundarytimer1" id="BPMNShape_boundarytimer1">
+        <omgdc:Bounds height="30.0" width="30.0" x="777.0" y="355.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="verificationDePaiement" id="BPMNShape_verificationDePaiement">
+        <omgdc:Bounds height="70.0" width="105.0" x="1048.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="1190.0" y="214.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask6" id="BPMNShape_usertask6">
+        <omgdc:Bounds height="55.0" width="105.0" x="1282.0" y="97.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="1470.0" y="107.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="alfrescoScripttask1" id="BPMNShape_alfrescoScripttask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="782.0" y="384.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="alfrescoScripttask2" id="BPMNShape_alfrescoScripttask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="777.0" y="43.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask9" id="BPMNShape_usertask9">
+        <omgdc:Bounds height="55.0" width="105.0" x="219.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Reception" id="BPMNShape_Reception">
+        <omgdc:Bounds height="59.0" width="105.0" x="470.0" y="214.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask10" id="BPMNShape_usertask10">
+        <omgdc:Bounds height="64.0" width="105.0" x="780.0" y="117.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundarytimer2" id="BPMNShape_boundarytimer2">
+        <omgdc:Bounds height="30.0" width="30.0" x="774.0" y="119.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask11" id="BPMNShape_usertask11">
+        <omgdc:Bounds height="63.0" width="105.0" x="1048.0" y="445.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundarytimer3" id="BPMNShape_boundarytimer3">
+        <omgdc:Bounds height="30.0" width="30.0" x="1048.0" y="495.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask12" id="BPMNShape_usertask12">
+        <omgdc:Bounds height="59.0" width="105.0" x="870.0" y="447.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundarytimer4" id="BPMNShape_boundarytimer4">
+        <omgdc:Bounds height="30.0" width="30.0" x="872.0" y="490.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway4" id="BPMNShape_exclusivegateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="726.0" y="223.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway1" id="BPMNShape_parallelgateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="812.0" y="223.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="alfrescoScripttask3" id="BPMNShape_alfrescoScripttask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="1048.0" y="530.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="alfrescoScripttask4" id="BPMNShape_alfrescoScripttask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="870.0" y="530.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="scripttask1" id="BPMNShape_scripttask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="600.0" y="216.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="inclusivegateway1" id="BPMNShape_inclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="920.0" y="214.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="211.0" y="243.0"></omgdi:waypoint>
+        <omgdi:waypoint x="251.0" y="243.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="36.0" y="243.0"></omgdi:waypoint>
+        <omgdi:waypoint x="106.0" y="243.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Paye" id="BPMNEdge_Paye">
+        <omgdi:waypoint x="1210.0" y="214.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1209.0" y="124.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1282.0" y="124.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="1221.0" y="154.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="1387.0" y="124.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1470.0" y="124.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="NonPaye" id="BPMNEdge_NonPaye">
+        <omgdi:waypoint x="1210.0" y="254.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1209.0" y="313.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1487.0" y="313.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1487.0" y="142.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="46.0" x="1221.0" y="289.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow21" id="BPMNEdge_flow21">
+        <omgdi:waypoint x="807.0" y="370.0"></omgdi:waypoint>
+        <omgdi:waypoint x="834.0" y="384.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Rejeter" id="BPMNEdge_Rejeter">
+        <omgdi:waypoint x="271.0" y="223.0"></omgdi:waypoint>
+        <omgdi:waypoint x="271.0" y="55.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="45.0" x="279.0" y="171.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
+        <omgdi:waypoint x="324.0" y="27.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1487.0" y="27.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1487.0" y="107.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
+        <omgdi:waypoint x="446.0" y="243.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="243.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow30" id="BPMNEdge_flow30">
+        <omgdi:waypoint x="1153.0" y="235.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1190.0" y="234.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Valider" id="BPMNEdge_Valider">
+        <omgdi:waypoint x="291.0" y="243.0"></omgdi:waypoint>
+        <omgdi:waypoint x="340.0" y="243.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="38.0" x="282.0" y="216.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow38" id="BPMNEdge_flow38">
+        <omgdi:waypoint x="1100.0" y="445.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1100.0" y="270.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow45" id="BPMNEdge_flow45">
+        <omgdi:waypoint x="766.0" y="243.0"></omgdi:waypoint>
+        <omgdi:waypoint x="812.0" y="243.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="93.0" x="735.0" y="206.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow46" id="BPMNEdge_flow46">
+        <omgdi:waypoint x="832.0" y="223.0"></omgdi:waypoint>
+        <omgdi:waypoint x="832.0" y="181.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow47" id="BPMNEdge_flow47">
+        <omgdi:waypoint x="832.0" y="263.0"></omgdi:waypoint>
+        <omgdi:waypoint x="832.0" y="302.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow48" id="BPMNEdge_flow48">
+        <omgdi:waypoint x="885.0" y="333.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="333.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="254.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow49" id="BPMNEdge_flow49">
+        <omgdi:waypoint x="885.0" y="149.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="148.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="214.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow50" id="BPMNEdge_flow50">
+        <omgdi:waypoint x="960.0" y="234.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1048.0" y="235.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow51" id="BPMNEdge_flow51">
+        <omgdi:waypoint x="746.0" y="263.0"></omgdi:waypoint>
+        <omgdi:waypoint x="745.0" y="476.0"></omgdi:waypoint>
+        <omgdi:waypoint x="870.0" y="476.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="78.0" x="751.0" y="273.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow55" id="BPMNEdge_flow55">
+        <omgdi:waypoint x="789.0" y="119.0"></omgdi:waypoint>
+        <omgdi:waypoint x="829.0" y="98.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow56" id="BPMNEdge_flow56">
+        <omgdi:waypoint x="1078.0" y="510.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1100.0" y="530.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow57" id="BPMNEdge_flow57">
+        <omgdi:waypoint x="872.0" y="505.0"></omgdi:waypoint>
+        <omgdi:waypoint x="922.0" y="530.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow58" id="BPMNEdge_flow58">
+        <omgdi:waypoint x="975.0" y="476.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1048.0" y="476.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow59" id="BPMNEdge_flow59">
+        <omgdi:waypoint x="575.0" y="243.0"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="243.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow60" id="BPMNEdge_flow60">
+        <omgdi:waypoint x="705.0" y="243.0"></omgdi:waypoint>
+        <omgdi:waypoint x="726.0" y="243.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

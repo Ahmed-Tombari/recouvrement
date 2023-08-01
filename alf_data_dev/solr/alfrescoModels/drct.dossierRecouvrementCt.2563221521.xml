@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0" name="drct:dossierRecouvrementCt">
+    <author>NT</author>
+    <imports>
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm"/>
+    </imports>
+    <namespaces>
+        <namespace uri="http://www.addinn.com/model/workflow/dossierRecouvrementCt/1.0" prefix="drct"/>
+    </namespaces>
+    <data-types/>
+    <constraints/>
+    <types>
+        <type name="drct:notificationhuissiernotaire">
+            <parent>bpm:startTask</parent>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drct:dossierProps</aspect>
+                <aspect>drct:transition</aspect>
+                <aspect>drct:detailDeLaCreance</aspect>
+                <aspect>drct:detailDeVersement</aspect>
+                <aspect>drct:garantiesEtEnquetes</aspect>
+                <aspect>drct:saisineDesTiers</aspect>
+                <aspect>drct:detailDesFrais</aspect>
+                <aspect>drct:saisineAvocat</aspect>
+                <aspect>drct:saisineHuissier</aspect>
+                <aspect>drct:saisineExpert</aspect>
+                <aspect>drct:agent</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drct:decisionDirecteur">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drct:transition</aspect>
+                <aspect>drct:dossierProps</aspect>
+                <aspect>drct:detailDeLaCreance</aspect>
+                <aspect>drct:detailDeVersement</aspect>
+                <aspect>drct:garantiesEtEnquetes</aspect>
+                <aspect>drct:saisineDesTiers</aspect>
+                <aspect>drct:detailDesFrais</aspect>
+                <aspect>drct:saisineAvocat</aspect>
+                <aspect>drct:saisineHuissier</aspect>
+                <aspect>drct:saisineExpert</aspect>
+                <aspect>drct:agent</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drct:affectationHuissierEtAvocat">
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drct:dossierProps</aspect>
+                <aspect>drct:detailDeLaCreance</aspect>
+                <aspect>drct:detailDeVersement</aspect>
+                <aspect>drct:garantiesEtEnquetes</aspect>
+                <aspect>drct:saisineDesTiers</aspect>
+                <aspect>drct:detailDesFrais</aspect>
+                <aspect>drct:saisineAvocat</aspect>
+                <aspect>drct:saisineHuissier</aspect>
+                <aspect>drct:saisineExpert</aspect>
+                <aspect>drct:transition</aspect>
+                <aspect>drct:agent</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drct:ajouterVersement">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties>
+                <property name="drct:ajouterVersementOutcome">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <default>superieur</default>
+                    <index enabled="true"/>
+                    <constraints>
+                        <constraint name="drct:ajouterVersementOutcomeList" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>superieur</value>
+                                    <value>inferieur</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+            <associations/>
+            <overrides>
+                <property name="bpm:packageItemActionGroup">
+                    <mandatory/>
+                    <default>read_package_item_actions</default>
+                    <constraints/>
+                </property>
+                <property name="bpm:outcomePropertyName">
+                    <mandatory/>
+                    <default>{http://www.addinn.com/model/workflow/dossierRecouvrementCt/1.0}ajouterVersementOutcome
+					</default>
+                    <constraints/>
+                </property>
+            </overrides>
+            <mandatory-aspects>
+                <aspect>drct:dossierProps</aspect>
+                <aspect>drct:detailDeLaCreance</aspect>
+                <aspect>drct:detailDeVersement</aspect>
+                <aspect>drct:garantiesEtEnquetes</aspect>
+                <aspect>drct:saisineDesTiers</aspect>
+                <aspect>drct:detailDesFrais</aspect>
+                <aspect>drct:saisineAvocat</aspect>
+                <aspect>drct:saisineHuissier</aspect>
+                <aspect>drct:saisineExpert</aspect>
+                <aspect>drct:agent</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drct:realisationEnquete">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties>
+                <property name="drct:verifierpaiementOutcome">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <default>Non Payé</default>
+                    <index enabled="true"/>
+                    <constraints>
+                        <constraint name="drct:verifierpaiementOutcomeList" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Payé</value>
+                                    <value>Non Payé</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+            <associations/>
+            <overrides>
+                <property name="bpm:packageItemActionGroup">
+                    <mandatory/>
+                    <default>read_package_item_actions</default>
+                    <constraints/>
+                </property>
+                <property name="bpm:outcomePropertyName">
+                    <mandatory/>
+                    <default>{http://www.addinn.com/model/workflow/dossierRecouvrementCt/1.0}verifierpaiementOutcome
+					</default>
+                    <constraints/>
+                </property>
+            </overrides>
+            <mandatory-aspects>
+                <aspect>drct:dossierProps</aspect>
+                <aspect>drct:agent</aspect>
+                <aspect>drct:detailDeLaCreance</aspect>
+                <aspect>drct:detailDeVersement</aspect>
+                <aspect>drct:garantiesEtEnquetes</aspect>
+                <aspect>drct:saisineDesTiers</aspect>
+                <aspect>drct:detailDesFrais</aspect>
+                <aspect>drct:saisineAvocat</aspect>
+                <aspect>drct:saisineHuissier</aspect>
+                <aspect>drct:saisineExpert</aspect>
+            </mandatory-aspects>
+        </type>
+    </types>
+    <aspects>
+        <aspect name="drct:transition">
+            <properties>
+                <property name="drct:transitionOutcome">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <default>suivant</default>
+                    <index enabled="true"/>
+                    <constraints>
+                        <constraint name="drct:transitionOutcomeList" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>suivant</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+            <associations/>
+            <overrides>
+                <property name="bpm:outcomePropertyName">
+                    <mandatory/>
+                    <default>{http://www.addinn.com/model/workflow/dossierRecouvrementWF/1.0}transitionOutcome
+					</default>
+                    <constraints/>
+                </property>
+            </overrides>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:dossierProps">
+            <properties>
+                <property name="drct:nom">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:prenom">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:telephone">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:code">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:adresse">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:codepostale">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:ville">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:gouvernorat">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:pays">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <default>Tunisia</default>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:raisonSociale">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:identifiant">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:montantDeCreance">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:interetDeRetard">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:fraidDeDossier">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:phase">
+                    <title>Phase</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                    <constraints>
+                        <constraint name="drct:LIST_Phases" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Amiable</value>
+                                    <value>Précontentieuse</value>
+                                    <value>Judiciaire</value>
+                                </list>
+                            </parameter>
+                            <parameter name="sorted">
+                                <value>true</value>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="drct:natureDeLaCreance">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:garant">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:detailDeLaCreance">
+            <properties>
+                <property name="drct:creances">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:montantDeLaCreance">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:nature">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:date">
+                    <type>d:date</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:detailDeVersement">
+            <properties>
+                <property name="drct:dateDeVersement">
+                    <type>d:date</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:montantDeVersement">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:modeDeReglement">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:affectation">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:garantiesEtEnquetes">
+            <properties>
+                <property name="drct:type">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:natureDeLHypothequeEnquetes">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:Rang">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:immatriculation">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:dateFinDeLHypotheque">
+                    <type>d:date</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:montantDeLHypotheque">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:Valeure">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:saisineDesTiers">
+            <properties>
+                <property name="drct:nomDeSaisine">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:region">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:typeDeTiers">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:nomDeTiers">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:detailDesFrais">
+            <properties>
+                <property name="drct:natureDuFrais">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:typeDuFrais">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:tiers">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:montantsDesFrais">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:dateDEffetDesIr">
+                    <type>d:date</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:saisineAvocat">
+            <properties>
+                <property name="drct:regionAvocat">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:avocatAvocat">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:saisineHuissier">
+            <properties>
+                <property name="drct:regionHuissier">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:avocatHuissier">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:saisineExpert">
+            <properties>
+                <property name="drct:regionExpert">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drct:avocatExpert">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:agent">
+            <properties/>
+            <associations>
+                <association name="drct:agent">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <class>cm:person</class>
+                        <mandatory enforced="true">true</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+            </associations>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drct:document">
+            <properties/>
+            <associations>
+                <association name="drct:content">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <class>cm:content</class>
+                        <mandatory enforced="true">true</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+            </associations>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+    </aspects>
+</model>

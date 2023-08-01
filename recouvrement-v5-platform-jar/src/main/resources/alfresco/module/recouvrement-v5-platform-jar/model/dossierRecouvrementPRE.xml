@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0"
+	name="drpre:dossierRecouvrementPRE">
+	<author>NT</author>
+	<imports>
+		<import uri="http://www.alfresco.org/model/content/1.0"
+			prefix="cm" />
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<import uri="http://www.alfresco.org/model/bpm/1.0"
+			prefix="bpm" />
+	</imports>
+
+	<namespaces>
+		<namespace
+			uri="http://www.addinn.com/model/workflow/dossierRecouvrementPRE/1.0"
+			prefix="drpre" />
+	</namespaces>
+
+	<types>
+		<type name="drpre:dossier">
+			<parent>bpm:startTask</parent>
+			<mandatory-aspects>
+				<aspect>drpre:dossierProps</aspect>
+				<aspect>drpre:transition</aspect>
+				<aspect>drpre:detailDeLaCreance</aspect>
+				<aspect>drpre:detailDeVersement</aspect>
+				<aspect>drpre:garantiesEtEnquetes</aspect>
+				<aspect>drpre:saisineDesTiers</aspect>
+				<aspect>drpre:detailDesFrais</aspect>
+				<aspect>drpre:agent</aspect>
+
+			</mandatory-aspects>
+		</type>
+		<type name="drpre:verifierdossier">
+			<parent>bpm:activitiOutcomeTask</parent>
+			<properties>
+				<property name="drpre:verifierdossierOutcome">
+					<type>d:text</type>
+					<default>incomplet</default>
+					<constraints>
+						<constraint type="LIST"
+							name="drpre:verifierdossierOutcomeList">
+							<parameter name="allowedValues">
+								<list>
+									<value>complet</value>
+									<value>incomplet</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+			<overrides>
+				<property name="bpm:packageItemActionGroup">
+					<default>read_package_item_actions</default>
+				</property>
+				<property name="bpm:outcomePropertyName">
+					<default>{http://www.addinn.com/model/workflow/dossierRecouvrementPRE/1.0}verifierdossierOutcome
+					</default>
+				</property>
+			</overrides>
+
+			<mandatory-aspects>
+				<aspect>drpre:dossierProps</aspect>
+				<aspect>drpre:detailDeLaCreance</aspect>
+				<aspect>drpre:detailDeVersement</aspect>
+				<aspect>drpre:garantiesEtEnquetes</aspect>
+				<aspect>drpre:saisineDesTiers</aspect>
+				<aspect>drpre:detailDesFrais</aspect>
+				<aspect>drpre:agent</aspect>
+			</mandatory-aspects>
+		</type>
+		<type name="drpre:communicationAvecLeHuissierNotaire">
+			<parent>bpm:activitiOutcomeTask</parent>
+			<properties>
+				<property
+					name="drpre:communicationAvecLeHuissierNotaireOutcome">
+					<type>d:text</type>
+					<default>lettre recue</default>
+					<constraints>
+						<constraint type="LIST"
+							name="drpre:communicationAvecLeHuissierNotaireOutcomeList">
+							<parameter name="allowedValues">
+								<list>
+									<value>lettre recue</value>
+									<value>lettre non recue</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+			<overrides>
+				<property name="bpm:packageItemActionGroup">
+					<default>read_package_item_actions</default>
+				</property>
+				<property name="bpm:outcomePropertyName">
+					<default>{http://www.addinn.com/model/workflow/dossierRecouvrementPRE/1.0}communicationAvecLeHuissierNotaireOutcome
+					</default>
+				</property>
+			</overrides>
+			<mandatory-aspects>
+				<aspect>drpre:dossierProps</aspect>
+				<aspect>drpre:detailDeLaCreance</aspect>
+				<aspect>drpre:detailDeVersement</aspect>
+				<aspect>drpre:garantiesEtEnquetes</aspect>
+				<aspect>drpre:saisineDesTiers</aspect>
+				<aspect>drpre:detailDesFrais</aspect>
+				<aspect>drpre:agent</aspect>
+			</mandatory-aspects>
+		</type>
+		<type name="drpre:alimentationDossier">
+			<parent>bpm:activitiOutcomeTask</parent>
+			<properties>
+				<property name="drpre:alimentationDossierOutcome">
+					<type>d:text</type>
+					<default>incomplet</default>
+					<constraints>
+						<constraint type="LIST"
+							name="drpre:alimentationDossierOutcomeList">
+							<parameter name="allowedValues">
+								<list>
+									<value>complet</value>
+									<value>incomplet</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+			<overrides>
+				<property name="bpm:packageItemActionGroup">
+					<default>read_package_item_actions</default>
+				</property>
+				<property name="bpm:outcomePropertyName">
+					<default>{http://www.addinn.com/model/workflow/dossierRecouvrementPRE/1.0}alimentationDossierOutcome
+					</default>
+				</property>
+			</overrides>
+			<mandatory-aspects>
+				<aspect>drpre:dossierProps</aspect>
+				<aspect>drpre:agent</aspect>
+				<aspect>drpre:detailDeLaCreance</aspect>
+				<aspect>drpre:detailDeVersement</aspect>
+				<aspect>drpre:garantiesEtEnquetes</aspect>
+				<aspect>drpre:saisineDesTiers</aspect>
+				<aspect>drpre:detailDesFrais</aspect>
+
+			</mandatory-aspects>
+		</type>
+		<type name="drpre:verificationDePaiement">
+			<parent>bpm:activitiOutcomeTask</parent>
+			<properties>
+
+				<property name="drpre:verifierpaiementOutcome">
+					<type>d:text</type>
+					<default>Non Paye</default>
+					<constraints>
+						<constraint type="LIST"
+							name="drpre:verifierpaiementOutcomeList">
+							<parameter name="allowedValues">
+								<list>
+									<value>Paye</value>
+									<value>Non Paye</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+
+			</properties>
+			<overrides>
+				<property name="bpm:packageItemActionGroup">
+					<default>read_package_item_actions</default>
+				</property>
+				<property name="bpm:outcomePropertyName">
+					<default>{http://www.addinn.com/model/workflow/dossierRecouvrementPRE/1.0}verifierpaiementOutcome
+					</default>
+				</property>
+			</overrides>
+
+			<mandatory-aspects>
+				<aspect>drpre:dossierProps</aspect>
+				<aspect>drpre:agent</aspect>
+				<aspect>drpre:detailDeLaCreance</aspect>
+				<aspect>drpre:detailDeVersement</aspect>
+				<aspect>drpre:garantiesEtEnquetes</aspect>
+				<aspect>drpre:saisineDesTiers</aspect>
+				<aspect>drpre:detailDesFrais</aspect>
+
+
+			</mandatory-aspects>
+		</type>
+		<type name="drpre:signalerDossier">
+			<parent>bpm:activitiOutcomeTask</parent>
+			<mandatory-aspects>
+				<aspect>drpre:dossierProps</aspect>
+				<aspect>drpre:transition</aspect>
+				<aspect>drpre:detailDeLaCreance</aspect>
+				<aspect>drpre:detailDeVersement</aspect>
+				<aspect>drpre:garantiesEtEnquetes</aspect>
+				<aspect>drpre:saisineDesTiers</aspect>
+				<aspect>drpre:detailDesFrais</aspect>
+				<aspect>drpre:agent</aspect>
+			</mandatory-aspects>
+		</type>
+		<type name="drpre:validationDePaiement">
+			<parent>bpm:activitiOutcomeTask</parent>
+			<mandatory-aspects>
+				<aspect>drpre:dossierProps</aspect>
+				<aspect>drpre:transition</aspect>
+				<aspect>drpre:detailDeLaCreance</aspect>
+				<aspect>drpre:detailDeVersement</aspect>
+				<aspect>drpre:garantiesEtEnquetes</aspect>
+				<aspect>drpre:saisineDesTiers</aspect>
+				<aspect>drpre:detailDesFrais</aspect>
+				<aspect>drpre:agent</aspect>
+			</mandatory-aspects>
+		</type>
+
+	</types>
+
+	<aspects>
+		<aspect name="drpre:transition">
+
+			<properties>
+				<property name="drpre:transitionOutcome">
+					<type>d:text</type>
+					<default>suivant</default>
+					<constraints>
+						<constraint type="LIST"
+							name="drpre:transitionOutcomeList">
+							<parameter name="allowedValues">
+								<list>
+									<value>suivant</value>
+
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+
+			</properties>
+			<overrides>
+				<property name="bpm:outcomePropertyName">
+					<default>{http://www.addinn.com/model/workflow/dossierRecouvrementWF/1.0}transitionOutcome
+					</default>
+				</property>
+			</overrides>
+		</aspect>
+
+		<aspect name="drpre:dossierProps">
+			<properties>
+				<property name="drpre:nom">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:prenom">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:telephone">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:code">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:cin">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:adresse">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:codepostale">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:ville">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:gouvernorat">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:pays">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Tunisia</default>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:raisonSociale">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:identifiant">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:montantDeCreance">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:interetDeRetard">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:fraidDeDossier">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:phase">
+					<title>Phase</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<index enabled="true">
+						<tokenised>true</tokenised>
+						<facetable>false</facetable>
+					</index>
+					<constraints>
+						<constraint name="drpre:LIST_Phases" type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Amiable</value>
+									<value>Précontentieuse</value>
+									<value>Judiciaire</value>
+								</list>
+							</parameter>
+							<parameter name="sorted">
+								<value>true</value>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="drpre:natureDeLaCreance">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+				</property>
+				<property name="drpre:garant">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:detailDeLaCreance">
+			<properties>
+				<property name="drpre:creances">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+
+					</index>
+
+				</property>
+
+				<property name="drpre:montantDeLaCreance">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:nature">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:date">
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:detailDeVersement">
+			<properties>
+				<property name="drpre:dateDeVersement">
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:montantDeVersement">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:modeDeReglement">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:affectation">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:garantiesEtEnquetes">
+			<properties>
+				<property name="drpre:type">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:natureDeLHypothequeEnquetes">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:Rang">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:immatriculation">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:dateFinDeLHypotheque">
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:montantDeLHypotheque">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:Valeure">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:saisineDesTiers">
+			<properties>
+				<property name="drpre:nomDeSaisine">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:region">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:typeDeTiers">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:nomDeTiers">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:detailDesFrais">
+			<properties>
+				<property name="drpre:natureDuFrais">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+
+				<property name="drpre:typeDuFrais">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:tiers">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:montantsDesFrais">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+
+				<property name="drpre:dateDEffetDesIr">
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:smsproperty">
+			<properties>
+				<property name="drpre:textsms">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:sentsms">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:lettreproperty">
+			<properties>
+				<property name="drpre:textLettre">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+				<property name="drpre:sentLettre">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:commentaireproperty">
+			<properties>
+				<property name="drpre:commentaireagent">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<index enabled="true">
+						<tokenised>false</tokenised>
+						<facetable>false</facetable>
+					</index>
+
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="drpre:agent">
+			<associations>
+
+				<association name="drpre:agent">
+					<source>
+						<mandatory>false</mandatory>
+						<many>false</many>
+					</source>
+					<target>
+						<class>cm:person</class>
+						<mandatory>true</mandatory>
+						<many>false</many>
+					</target>
+				</association>
+
+			</associations>
+		</aspect>
+		<aspect name="drpre:document">
+			<associations>
+
+				<association name="drpre:content">
+					<source>
+						<mandatory>false</mandatory>
+						<many>false</many>
+					</source>
+					<target>
+						<class>cm:content</class>
+						<mandatory>true</mandatory>
+						<many>false</many>
+					</target>
+				</association>
+
+			</associations>
+		</aspect>
+	</aspects>
+
+</model>

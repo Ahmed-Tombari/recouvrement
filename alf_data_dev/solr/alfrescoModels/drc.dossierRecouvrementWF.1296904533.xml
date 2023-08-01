@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0" name="drc:dossierRecouvrementWF">
+    <author>NT</author>
+    <imports>
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm"/>
+    </imports>
+    <namespaces>
+        <namespace uri="http://www.addinn.com/model/workflow/dossierRecouvrementWF/1.0" prefix="drc"/>
+    </namespaces>
+    <data-types/>
+    <constraints/>
+    <types>
+        <type name="drc:dossier">
+            <parent>bpm:startTask</parent>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+                <aspect>drc:transition</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drc:verifierdossier">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties>
+                <property name="drc:verifierdossierOutcome">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <default>incomplet</default>
+                    <index enabled="true"/>
+                    <constraints>
+                        <constraint name="drc:verifierdossierOutcomeList" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>complet</value>
+                                    <value>incomplet</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+            <associations/>
+            <overrides>
+                <property name="bpm:packageItemActionGroup">
+                    <mandatory/>
+                    <default>read_package_item_actions</default>
+                    <constraints/>
+                </property>
+                <property name="bpm:outcomePropertyName">
+                    <mandatory/>
+                    <default>{http://www.addinn.com/model/workflow/dossierRecouvrementWF/1.0}verifierdossierOutcome</default>
+                    <constraints/>
+                </property>
+            </overrides>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drc:affecterdossier">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+                <aspect>drc:agent</aspect>
+                <aspect>drc:transition</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drc:signalerdossier">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+                <aspect>drc:transition</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drc:receptiondossier">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+                <aspect>drc:transition</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drc:envoiDeMessage">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+                <aspect>drc:transition</aspect>
+                <aspect>drc:smsproperty</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drc:verificationDePaiement">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties>
+                <property name="drc:verifierpaiementOutcome">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <default>Non Payé</default>
+                    <index enabled="true"/>
+                    <constraints>
+                        <constraint name="drc:verifierpaiementOutcomeList" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Payé</value>
+                                    <value>Non Payé</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+            <associations/>
+            <overrides>
+                <property name="bpm:packageItemActionGroup">
+                    <mandatory/>
+                    <default>read_package_item_actions</default>
+                    <constraints/>
+                </property>
+                <property name="bpm:outcomePropertyName">
+                    <mandatory/>
+                    <default>{http://www.addinn.com/model/workflow/dossierRecouvrementWF/1.0}verifierpaiementOutcome</default>
+                    <constraints/>
+                </property>
+            </overrides>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+                <aspect>drc:smsproperty</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drc:appeldedebiteur">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties>
+                <property name="drc:appelDebiteurOutcome">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <default>Non Payé</default>
+                    <index enabled="true"/>
+                    <constraints>
+                        <constraint name="drc:appelDebiteurOutcomeList" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Payé</value>
+                                    <value>Non Payé</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+            <associations/>
+            <overrides>
+                <property name="bpm:packageItemActionGroup">
+                    <mandatory/>
+                    <default>read_package_item_actions</default>
+                    <constraints/>
+                </property>
+                <property name="bpm:outcomePropertyName">
+                    <mandatory/>
+                    <default>{http://www.addinn.com/model/workflow/dossierRecouvrementWF/1.0}appelDebiteurOutcome</default>
+                    <constraints/>
+                </property>
+            </overrides>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+                <aspect>drc:transition</aspect>
+                <aspect>drc:commentaireproperty</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="drc:passerPhasePrecontentieuse">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties/>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects>
+                <aspect>drc:dossierProps</aspect>
+                <aspect>drc:transition</aspect>
+                <aspect>drc:commentaireproperty</aspect>
+            </mandatory-aspects>
+        </type>
+    </types>
+    <aspects>
+        <aspect name="drc:transition">
+            <properties>
+                <property name="drc:transitionOutcome">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <default>suivant</default>
+                    <index enabled="true"/>
+                    <constraints>
+                        <constraint name="drc:transitionOutcomeList" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>suivant</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+            <associations/>
+            <overrides>
+                <property name="bpm:outcomePropertyName">
+                    <mandatory/>
+                    <default>{http://www.addinn.com/model/workflow/dossierRecouvrementWF/1.0}transitionOutcome</default>
+                    <constraints/>
+                </property>
+            </overrides>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drc:dossierProps">
+            <properties>
+                <property name="drc:nom">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:prenom">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:telephone">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:code">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:adresse">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:codepostale">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:ville">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:gouvernorat">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:pays">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <default>Tunisia</default>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:raisonSociale">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:identifiant">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:montantDeCreance">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:interetDeRetard">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:fraidDeDossier">
+                    <type>d:int</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:phase">
+                    <title>Phase</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                    <constraints>
+                        <constraint name="drc:LIST_Phases" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Amiable</value>
+                                    <value>Précontentieuse</value>
+                                    <value>Judiciaire</value>
+                                </list>
+                            </parameter>
+                            <parameter name="sorted">
+                                <value>true</value>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drc:smsproperty">
+            <properties>
+                <property name="drc:textsms">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="drc:sentsms">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drc:commentaireproperty">
+            <properties>
+                <property name="drc:commentaireagent">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+        <aspect name="drc:agent">
+            <properties/>
+            <associations>
+                <association name="drc:agent">
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <class>cm:person</class>
+                        <mandatory enforced="true">true</mandatory>
+                        <many>false</many>
+                    </target>
+                </association>
+            </associations>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+    </aspects>
+</model>

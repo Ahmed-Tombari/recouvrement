@@ -1,0 +1,1562 @@
+<extension>
+    <modules>
+        <module>
+            <id>PhaseContentieuse</id>
+            <version>1.0</version>
+            <auto-deploy>true</auto-deploy>
+            <configurations>
+                <config evaluator="string-compare" condition="activiti$PhaseContentieuse">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drct:nom"/>
+                                <show id="drct:prenom"/>
+                                <show id="drct:telephone"/>
+                                <show id="drct:code"/>
+                                <show id="drct:adresse"/>
+                                <show id="drct:codepostale"/>
+                                <show id="drct:ville"/>
+                                <show id="drct:gouvernorat"/>
+                                <show id="drct:pays"/>
+                                <show id="drct:raisonSociale"/>
+                                <show id="drct:identifiant"/>
+                                <show id="drct:montantDeCreance"/>
+                                <show id="drct:interetDeRetard"/>
+                                <show id="drct:fraidDeDossier"/>
+
+
+                                <show id="drct:natureDeLaCreance"/>
+                                <show id="drct:garant"/>
+
+                                <show id="drct:creances"/>
+                                <show id="drct:montantDeLaCreance"/>
+                                <show id="drct:nature"/>
+                                <show id="drct:date"/>
+
+
+                                <show id="drct:dateDeVersement"/>
+                                <show id="drct:montantDeVersement"/>
+                                <show id="drct:modeDeReglement"/>
+                                <show id="drct:affectation"/>
+
+
+                                <show id="drct:type"/>
+                                <show id="drct:natureDeLHypothequeEnquetes"/>
+                                <show id="drct:Rang"/>
+                                <show id="drct:immatriculation"/>
+                                <show id="drct:dateFinDeLHypotheque"/>
+                                <show id="drct:montantDeLHypotheque"/>
+                                <show id="drct:Valeure"/>
+
+                                <show id="drct:nomDeSaisine"/>
+                                <show id="drct:region"/>
+                                <show id="drct:typeDeTiers"/>
+                                <show id="drct:nomDeTiers"/>
+
+                                <show id="drct:natureDuFrais"/>
+                                <show id="drct:typeDuFrais"/>
+                                <show id="drct:tiers"/>
+                                <show id="drct:montantsDesFrais"/>
+                                <show id="drct:dateDEffetDesIr"/>
+
+                                <show id="drct:regionAvocat"/>
+                                <show id="drct:avocatAvocat"/>
+
+                                <show id="drct:regionHuissier"/>
+                                <show id="drct:avocatHuissier"/>
+
+                                <show id="drct:regionExpert"/>
+                                <show id="drct:avocatExpert"/>
+
+
+                                <show id="drct:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+
+
+                            </field-visibility>
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="nom et prenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="code et numero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="adresse , code postale et ville"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="gouvernorat et pays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label="Raison sociale et identifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label="Montant, Interet et Frais"/>
+
+                                <set id="informationGenerale" appearance="title" label="Information Generale"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+                                <set id="detailDeCreance" appearance="title" label-id="items"
+                                     label="Détail de la créance" template="/org/alfresco/components/form/2-column-set.ftl"/>
+                                <set id="detailDeVersement" appearance="title" label-id="comment"
+                                     label=" Détail de versement " template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <set id="detailDesFrais" appearance="title" label="Détail des frais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+                                <set id="garantieEtEnquete" appearance="title"
+                                     label="Garantie et enquete" template="/org/alfresco/components/form/2-column-set.ftl"/>
+                                <set id="saisineDesTiers" appearance="title"
+                                     label=" Saisine des tiers " template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+
+                                <set id="phase" appearance="title" label="phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="Réponse" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drct:nom" label="nom" set="NomPrenom"/>
+                                <field id="drct:prenom" label="prenom" set="NomPrenom"/>
+
+                                <field id="drct:telephone" label="telephone" set="codeNumero"/>
+                                <field id="drct:code" label="code" set="codeNumero"/>
+
+                                <field id="drct:adresse" label="adresse" set="AdresseCodepostaleVille"/>
+                                <field id="drct:codepostale" label="codepostale" set="AdresseCodepostaleVille"/>
+                                <field id="drct:ville" label="ville" set="AdresseCodepostaleVille"/>
+
+                                <field id="drct:gouvernorat" label="gouvernorat" set="GouvernoratPays"/>
+                                <field id="drct:pays" label="pays" set="GouvernoratPays"/>
+
+                                <field id="drct:raisonSociale"      label="raisonsociale" set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:identifiant"        label="identifiant" set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:montantDeCreance"   label="montant de creance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:interetDeRetard"    label="interet de retard" set="MontantInteretFrais"/>
+                                <field id="drct:fraidDeDossier"     label="frais de dossier" set="MontantInteretFrais"/>
+
+                                <field id="drct:natureDeLaCreance"  label="nature De La Creance"
+                                       set="informationGenerale"/>
+                                <field id="drct:garant"             label="garant" set="informationGenerale"/>
+
+                                <field id="drct:creances"           label="creances" set="detailDeCreance"/>
+                                <field id="drct:montantDeLaCreance" label="montant De La Creance"
+                                       set="detailDeCreance"/>
+                                <field id="drct:nature"             label="nature" set="detailDeCreance"/>
+                                <field id="drct:date"    label="date" set="detailDeCreance"/>
+
+                                <field id="drct:dateDeVersement"    label="date De Versement" set="detailDeVersement"/>
+                                <field id="drct:montantDeVersement" label="montant De Versement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:modeDeReglement"    label="mode De Reglement" set="detailDeVersement"/>
+                                <field id="drct:affectation"        label="affectation" set="detailDeVersement"/>
+
+                                <field id="drct:type"               label="type" set="MontantInteretFrais"/>
+                                <field id="drct:natureDeLHypothequeEnquetes" label="nature De L'hypotheque Enquetes"
+                                       set="MontantInteretFrais"/>
+                                <field id="drct:Rang"                 label="Rang" set="MontantInteretFrais"/>
+                                <field id="drct:immatriculation" label="immatriculation" set="MontantInteretFrais"/>
+                                <field id="drct:dateFinDeLHypotheque" label="date Fin De 'hypotheque"
+                                       set="MontantInteretFrais"/>
+                                <field id="drct:montantDeLHypotheque" label="montant De L'hypotheque"
+                                       set="MontantInteretFrais"/>
+                                <field id="drct:Valeure" label="Valeur" set="MontantInteretFrais"/>
+
+                                <field id="drct:nomDeSaisine" label="nom De Saisine" set="MontantInteretFrais"/>
+                                <field id="drct:region" label="region" set="MontantInteretFrais"/>
+                                <field id="drct:typeDeTiers" label="type De Tiers" set="MontantInteretFrais"/>
+                                <field id="drct:nomDeTiers" label="nom De Tiers" set="MontantInteretFrais"/>
+                                <!--<field id="drct:content" label="content" set="MontantInteretFrais"/>-->
+
+                                <field id="drct:natureDuFrais" label="nature Du Frais" set="MontantInteretFrais"/>
+                                <field id="drct:typeDuFrais" label="type Du Frais" set="MontantInteretFrais"/>
+                                <field id="drct:tiers" label="tiers" set="MontantInteretFrais"/>
+                                <field id="drct:montantsDesFrais" label="montants Des Frais" set="MontantInteretFrais"/>
+                                <field id="drct:dateDEffetDesIr" label="date D'effetDesIr" set="MontantInteretFrais"/>
+
+                                <field id="drct:regionAvocat" label="date D'effetDesIr" />
+                                <field id="drct:avocatAvocat" label="date D'effetDesIr" />
+
+                                <field id="drct:regionHuissier" label="date D'effetDesIr" />
+                                <field id="drct:avocatHuissier" label="date D'effetDesIr" />
+
+                                <field id="drct:regionExpert" label="date D'effetDesIr" />
+                                <field id="drct:dateDEffetDesIr" label="date D'effetDesIr" />
+
+                                <field id="drct:phase" label="phase" set="phase"/>
+
+
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+
+                <config evaluator="task-type" condition="drct:decisionDirecteur">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drct:nom"/>
+                                <show id="drct:prenom"/>
+                                <show id="drct:telephone"/>
+                                <show id="drct:code"/>
+                                <show id="drct:adresse"/>
+                                <show id="drct:codepostale"/>
+                                <show id="drct:ville"/>
+                                <show id="drct:gouvernorat"/>
+                                <show id="drct:pays"/>
+                                <show id="drct:raisonSociale"/>
+                                <show id="drct:identifiant"/>
+                                <show id="drct:montantDeCreance"/>
+                                <show id="drct:interetDeRetard"/>
+                                <show id="drct:fraidDeDossier"/>
+
+                                <show id="drct:natureDeLaCreance"/>
+                                <show id="drct:garant"/>
+
+                                <show id="drct:creances"/>
+                                <show id="drct:montantDeLaCreance"/>
+                                <show id="drct:nature"/>
+                                <show id="drct:date"/>
+
+                                <show id="drct:dateDeVersement"/>
+                                <show id="drct:montantDeVersement"/>
+                                <show id="drct:modeDeReglement"/>
+                                <show id="drct:affectation"/>
+
+                                <show id="drct:type"/>
+                                <show id="drct:natureDeLHypothequeEnquetes"/>
+                                <show id="drct:Rang"/>
+                                <show id="drct:immatriculation"/>
+                                <show id="drct:dateFinDeLHypotheque"/>
+                                <show id="drct:montantDeLHypotheque"/>
+                                <show id="drct:Valeure"/>
+
+                                <show id="drct:nomDeSaisine"/>
+                                <show id="drct:region"/>
+                                <show id="drct:typeDeTiers"/>
+                                <show id="drct:nomDeTiers"/>
+
+                                <show id="drct:natureDuFrais"/>
+                                <show id="drct:typeDuFrais"/>
+                                <show id="drct:tiers"/>
+                                <show id="drct:montantsDesFrais"/>
+                                <show id="drct:dateDEffetDesIr"/>
+
+                                <show id="drct:regionAvocat"/>
+                                <show id="drct:avocatAvocat"/>
+
+                                <show id="drct:regionHuissier"/>
+                                <show id="drct:avocatHuissier"/>
+
+                                <show id="drct:regionExpert"/>
+                                <show id="drct:avocatExpert"/>
+
+                                <show id="drct:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drct:decisionDirecteurOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="avocat" appearance="title" label="avocat"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="huissier" appearance="title" label="huissier"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="expert" appearance="title" label="expert"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drct:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drct:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drct:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drct:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drct:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drct:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drct:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drct:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drct:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drct:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drct:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drct:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drct:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drct:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drct:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drct:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drct:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drct:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drct:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drct:regionAvocat"           label="region"
+                                       set="avocat"/>
+                                <field id="drct:avocatAvocat"           label="type"
+                                       set="avocat"/>
+
+                                <field id="drct:regionHuissier"           label="region"
+                                       set="huissier"/>
+                                <field id="drct:avocatHuissier"           label="type"
+                                       set="huissier"/>
+
+                                <field id="drct:regionExpert"           label="region"
+                                       set="expert"/>
+                                <field id="drct:avocatExpert"           label="type"
+                                       set="expert"/>
+
+
+                                <field id="drct:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+
+                                <field id="drct:decisionDirecteurOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drct:affecterHuissier">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drct:nom"/>
+                                <show id="drct:prenom"/>
+                                <show id="drct:telephone"/>
+                                <show id="drct:code"/>
+                                <show id="drct:adresse"/>
+                                <show id="drct:codepostale"/>
+                                <show id="drct:ville"/>
+                                <show id="drct:gouvernorat"/>
+                                <show id="drct:pays"/>
+                                <show id="drct:raisonSociale"/>
+                                <show id="drct:identifiant"/>
+                                <show id="drct:montantDeCreance"/>
+                                <show id="drct:interetDeRetard"/>
+                                <show id="drct:fraidDeDossier"/>
+
+
+                                <show id="drct:natureDeLaCreance"/>
+                                <show id="drct:garant"/>
+
+                                <show id="drct:creances"/>
+                                <show id="drct:montantDeLaCreance"/>
+                                <show id="drct:nature"/>
+                                <show id="drct:date"/>
+
+
+                                <show id="drct:dateDeVersement"/>
+                                <show id="drct:montantDeVersement"/>
+                                <show id="drct:modeDeReglement"/>
+                                <show id="drct:affectation"/>
+
+
+                                <show id="drct:type"/>
+                                <show id="drct:natureDeLHypothequeEnquetes"/>
+                                <show id="drct:Rang"/>
+                                <show id="drct:immatriculation"/>
+                                <show id="drct:dateFinDeLHypotheque"/>
+                                <show id="drct:montantDeLHypotheque"/>
+                                <show id="drct:Valeure"/>
+
+
+                                <show id="drct:nomDeSaisine"/>
+                                <show id="drct:region"/>
+                                <show id="drct:typeDeTiers"/>
+                                <show id="drct:nomDeTiers"/>
+
+
+                                <show id="drct:natureDuFrais"/>
+                                <show id="drct:typeDuFrais"/>
+                                <show id="drct:montantsDesFrais"/>
+                                <show id="drct:dateDEffetDesIr"/>
+
+                                <show id="drct:regionAvocat"/>
+                                <show id="drct:avocatAvocat"/>
+
+                                <show id="drct:regionHuissier"/>
+                                <show id="drct:avocatHuissier"/>
+
+                                <show id="drct:regionExpert"/>
+                                <show id="drct:avocatExpert"/>
+
+                                <show id="drct:phase"/>
+                                <show id="drct:tiersAvocat"/>
+                                <show id="drct:tiersHuissier"/>
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drct:transitionOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="avocat" appearance="title" label="avocat"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="huissier" appearance="title" label="huissier"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="expert" appearance="title" label="expert"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+                                <set id="Affecterhuissier" appearance="title" label="AffecterHuissier"/>
+                                <set id="avocatAffecte" appearance="title" label="AvocatAffecte"
+                                     template="/org/alfresco/components/form/1-column-set.ftl" />
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drct:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drct:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drct:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drct:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drct:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drct:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drct:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drct:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drct:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drct:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drct:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drct:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drct:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drct:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drct:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drct:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drct:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drct:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drct:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drct:regionAvocat"           label="region"
+                                       set="avocat"/>
+                                <field id="drct:avocatAvocat"           label="type"
+                                       set="avocat"/>
+
+                                <field id="drct:regionHuissier"           label="region"
+                                       set="huissier"/>
+                                <field id="drct:avocatHuissier"           label="type"
+                                       set="huissier"/>
+
+                                <field id="drct:regionExpert"           label="region"
+                                       set="expert"/>
+                                <field id="drct:avocatExpert"           label="type"
+                                       set="expert"/>
+
+
+                                <field id="drct:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+                                <field id="drct:tiersAvocat"                    label="avocatAffecte"
+                                       set="avocatAffecte" />
+
+
+                                <field id="drct:tiersHuissier"                    label="Huissier"
+                                       set="Affecterhuissier" >
+                                    <control
+                                            template="/org/alfresco/components/form/controls/association.ftl">
+                                        <control-param name="showTargetLink">true</control-param>
+                                        <control-param name="rootNode">/app:company_home/app:dictionary/cm:tiers/cm:Huissier
+                                        </control-param>
+                                    </control>
+                                </field>
+
+
+
+                                <field id="drct:transitionOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drct:affecterAvocat">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drct:nom"/>
+                                <show id="drct:prenom"/>
+                                <show id="drct:telephone"/>
+                                <show id="drct:code"/>
+                                <show id="drct:adresse"/>
+                                <show id="drct:codepostale"/>
+                                <show id="drct:ville"/>
+                                <show id="drct:gouvernorat"/>
+                                <show id="drct:pays"/>
+                                <show id="drct:raisonSociale"/>
+                                <show id="drct:identifiant"/>
+                                <show id="drct:montantDeCreance"/>
+                                <show id="drct:interetDeRetard"/>
+                                <show id="drct:fraidDeDossier"/>
+
+
+                                <show id="drct:natureDeLaCreance"/>
+                                <show id="drct:garant"/>
+
+                                <show id="drct:creances"/>
+                                <show id="drct:montantDeLaCreance"/>
+                                <show id="drct:nature"/>
+                                <show id="drct:date"/>
+
+
+                                <show id="drct:dateDeVersement"/>
+                                <show id="drct:montantDeVersement"/>
+                                <show id="drct:modeDeReglement"/>
+                                <show id="drct:affectation"/>
+
+
+                                <show id="drct:type"/>
+                                <show id="drct:natureDeLHypothequeEnquetes"/>
+                                <show id="drct:Rang"/>
+                                <show id="drct:immatriculation"/>
+                                <show id="drct:dateFinDeLHypotheque"/>
+                                <show id="drct:montantDeLHypotheque"/>
+                                <show id="drct:Valeure"/>
+
+
+                                <show id="drct:nomDeSaisine"/>
+                                <show id="drct:region"/>
+                                <show id="drct:typeDeTiers"/>
+                                <show id="drct:nomDeTiers"/>
+
+
+                                <show id="drct:natureDuFrais"/>
+                                <show id="drct:typeDuFrais"/>
+                                <show id="drct:tiers"/>
+                                <show id="drct:montantsDesFrais"/>
+                                <show id="drct:dateDEffetDesIr"/>
+
+                                <show id="drct:regionAvocat"/>
+                                <show id="drct:avocatAvocat"/>
+
+                                <show id="drct:regionHuissier"/>
+                                <show id="drct:avocatHuissier"/>
+
+                                <show id="drct:regionExpert"/>
+                                <show id="drct:avocatExpert"/>
+
+                                <show id="drct:phase"/>
+                                <show id="drct:tiersAvocat"/>
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drct:transitionOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="avocat" appearance="title" label="avocat"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="huissier" appearance="title" label="huissier"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="expert" appearance="title" label="expert"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+                                <set id="Affecteravocat" appearance="title" label="AffecterAvocat"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drct:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drct:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drct:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drct:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drct:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drct:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drct:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drct:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drct:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drct:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drct:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drct:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drct:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drct:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drct:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drct:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drct:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drct:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drct:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drct:regionAvocat"           label="region"
+                                       set="avocat"/>
+                                <field id="drct:avocatAvocat"           label="type"
+                                       set="avocat"/>
+
+                                <field id="drct:regionHuissier"           label="region"
+                                       set="huissier"/>
+                                <field id="drct:avocatHuissier"           label="type"
+                                       set="huissier"/>
+
+                                <field id="drct:regionExpert"           label="region"
+                                       set="expert"/>
+                                <field id="drct:avocatExpert"           label="type"
+                                       set="expert"/>
+
+
+                                <field id="drct:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+                                <field id="drct:tiersAvocat"                    label="Avocat"
+                                       set="Affecteravocat" >
+                                    <control
+                                            template="/org/alfresco/components/form/controls/association.ftl">
+                                        <control-param name="showTargetLink">true</control-param>
+                                        <control-param name="rootNode">/app:company_home/app:dictionary/cm:tiers/cm:Avocat
+                                        </control-param>
+                                    </control>
+                                </field>
+
+
+                                <field id="drct:transitionOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                <config evaluator="task-type" condition="drct:ajouterVersement">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drct:nom"/>
+                                <show id="drct:prenom"/>
+                                <show id="drct:telephone"/>
+                                <show id="drct:code"/>
+                                <show id="drct:adresse"/>
+                                <show id="drct:codepostale"/>
+                                <show id="drct:ville"/>
+                                <show id="drct:gouvernorat"/>
+                                <show id="drct:pays"/>
+                                <show id="drct:raisonSociale"/>
+                                <show id="drct:identifiant"/>
+                                <show id="drct:montantDeCreance"/>
+                                <show id="drct:interetDeRetard"/>
+                                <show id="drct:fraidDeDossier"/>
+
+
+                                <show id="drct:natureDeLaCreance"/>
+                                <show id="drct:garant"/>
+
+                                <show id="drct:creances"/>
+                                <show id="drct:montantDeLaCreance"/>
+                                <show id="drct:nature"/>
+                                <show id="drct:date"/>
+
+
+                                <show id="drct:dateDeVersement"/>
+                                <show id="drct:montantDeVersement"/>
+                                <show id="drct:modeDeReglement"/>
+                                <show id="drct:affectation"/>
+
+
+                                <show id="drct:type"/>
+                                <show id="drct:natureDeLHypothequeEnquetes"/>
+                                <show id="drct:Rang"/>
+                                <show id="drct:immatriculation"/>
+                                <show id="drct:dateFinDeLHypotheque"/>
+                                <show id="drct:montantDeLHypotheque"/>
+                                <show id="drct:Valeure"/>
+
+
+                                <show id="drct:nomDeSaisine"/>
+                                <show id="drct:region"/>
+                                <show id="drct:typeDeTiers"/>
+                                <show id="drct:nomDeTiers"/>
+
+
+                                <show id="drct:natureDuFrais"/>
+                                <show id="drct:typeDuFrais"/>
+                                <show id="drct:tiers"/>
+                                <show id="drct:montantsDesFrais"/>
+                                <show id="drct:dateDEffetDesIr"/>
+
+                                <show id="drct:regionAvocat"/>
+                                <show id="drct:avocatAvocat"/>
+
+                                <show id="drct:regionHuissier"/>
+                                <show id="drct:avocatHuissier"/>
+
+                                <show id="drct:regionExpert"/>
+                                <show id="drct:avocatExpert"/>
+
+                                <show id="drct:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drct:ajouterVersementOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="avocat" appearance="title" label="avocat"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="huissier" appearance="title" label="huissier"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="expert" appearance="title" label="expert"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drct:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drct:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drct:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drct:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drct:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drct:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drct:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drct:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drct:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drct:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drct:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drct:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drct:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drct:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drct:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drct:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drct:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drct:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drct:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drct:regionAvocat"           label="region"
+                                       set="avocat"/>
+                                <field id="drct:avocatAvocat"           label="type"
+                                       set="avocat"/>
+
+                                <field id="drct:regionHuissier"           label="region"
+                                       set="huissier"/>
+                                <field id="drct:avocatHuissier"           label="type"
+                                       set="huissier"/>
+
+                                <field id="drct:regionExpert"           label="region"
+                                       set="expert"/>
+                                <field id="drct:avocatExpert"           label="type"
+                                       set="expert"/>
+
+
+                                <field id="drct:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+
+                                <field id="drct:ajouterVersementOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+
+                <config evaluator="task-type" condition="drct:realisationEnquete">
+                    <forms>
+                        <form>
+                            <field-visibility>
+
+                                <show id="drct:nom"/>
+                                <show id="drct:prenom"/>
+                                <show id="drct:telephone"/>
+                                <show id="drct:code"/>
+                                <show id="drct:adresse"/>
+                                <show id="drct:codepostale"/>
+                                <show id="drct:ville"/>
+                                <show id="drct:gouvernorat"/>
+                                <show id="drct:pays"/>
+                                <show id="drct:raisonSociale"/>
+                                <show id="drct:identifiant"/>
+                                <show id="drct:montantDeCreance"/>
+                                <show id="drct:interetDeRetard"/>
+                                <show id="drct:fraidDeDossier"/>
+
+
+                                <show id="drct:natureDeLaCreance"/>
+                                <show id="drct:garant"/>
+
+                                <show id="drct:creances"/>
+                                <show id="drct:montantDeLaCreance"/>
+                                <show id="drct:nature"/>
+                                <show id="drct:date"/>
+
+
+                                <show id="drct:dateDeVersement"/>
+                                <show id="drct:montantDeVersement"/>
+                                <show id="drct:modeDeReglement"/>
+                                <show id="drct:affectation"/>
+
+
+                                <show id="drct:type"/>
+                                <show id="drct:natureDeLHypothequeEnquetes"/>
+                                <show id="drct:Rang"/>
+                                <show id="drct:immatriculation"/>
+                                <show id="drct:dateFinDeLHypotheque"/>
+                                <show id="drct:montantDeLHypotheque"/>
+                                <show id="drct:Valeure"/>
+
+
+                                <show id="drct:nomDeSaisine"/>
+                                <show id="drct:region"/>
+                                <show id="drct:typeDeTiers"/>
+                                <show id="drct:nomDeTiers"/>
+
+
+                                <show id="drct:natureDuFrais"/>
+                                <show id="drct:typeDuFrais"/>
+                                <show id="drct:tiers"/>
+                                <show id="drct:montantsDesFrais"/>
+                                <show id="drct:dateDEffetDesIr"/>
+
+                                <show id="drct:regionAvocat"/>
+                                <show id="drct:avocatAvocat"/>
+
+                                <show id="drct:regionHuissier"/>
+                                <show id="drct:avocatHuissier"/>
+
+                                <show id="drct:regionExpert"/>
+                                <show id="drct:avocatExpert"/>
+
+                                <show id="drct:phase"/>
+
+                                <show id="bpm:comment"/>
+                                <show id="packageItems"/>
+                                <show id="drct:transitionOutcome"/>
+
+
+                            </field-visibility>
+
+                            <appearance>
+
+
+                                <set id="NomPrenom" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.nomprenom"/>
+                                <set id="codeNumero" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.codeNumero"/>
+                                <set id="AdresseCodepostaleVille" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.AdresseCodepostaleVille"/>
+                                <set id="GouvernoratPays" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.GouvernoratPays"/>
+                                <set id="RaisonsocialeIdentifiant" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.RaisonsocialeIdentifiant"/>
+                                <set id="MontantInteretFrais" appearance="title"
+                                     template="/org/alfresco/components/form/3-column-set.ftl"
+                                     label-id="workflow.set.MontantInteretFrais"/>
+
+                                <set id="informationGenerale" appearance="title"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"
+                                     label-id="workflow.set.phase "/>
+                                <set id="detailDeCreance" appearance="title" label-id="workflow.set.detailDeCreance"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="detailDeVersement" appearance="title" label-id="workflow.set.detailDeVersement"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="detailDesFrais" appearance="title" label-id="workflow.set.detailDesFrais"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="garantieEtEnquete" appearance="title" label-id="workflow.set.garantieEtEnquete"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="saisineDesTiers" appearance="title" label-id="workflow.set.saisineDesTiers"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="avocat" appearance="title" label="avocat"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="huissier" appearance="title" label="huissier"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+                                <set id="expert" appearance="title" label="expert"
+                                     template="/org/alfresco/components/form/2-column-set.ftl" />
+
+                                <set id="phase" appearance="title" label-id="workflow.set.phase"/>
+                                <set id="items" appearance="title" label-id="items" label="items"/>
+                                <set id="comment" appearance="title" label-id="comment" label="comment"/>
+
+                                <set id="response" appearance="title" label-id="workflow.set.response" label="reponse"
+                                     template="/org/alfresco/components/form/2-column-set.ftl"/>
+
+                                <field id="drct:nom"                       label-id="workflow.field.nom"
+                                       set="NomPrenom"/>
+                                <field id="drct:prenom"                    label-id="workflow.field.prenom"
+                                       set="NomPrenom"/>
+
+                                <field id="drct:telephone"                 label-id="workflow.field.telephone"
+                                       set="codeNumero"/>
+                                <field id="drct:code"                      label-id="workflow.field.code"
+                                       set="codeNumero"/>
+
+                                <field id="drct:adresse"                   label-id="workflow.field.adresse"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:codepostale"               label-id="workflow.field.codepostale"
+                                       set="AdresseCodepostaleVille"/>
+                                <field id="drct:ville"                     label-id="workflow.field.ville"
+                                       set="AdresseCodepostaleVille"/>
+
+                                <field id="drct:gouvernorat"               label-id="workflow.field.gouvernorat"
+                                       set="GouvernoratPays"/>
+                                <field id="drct:pays"                      label-id="workflow.field.pays"
+                                       set="GouvernoratPays"/>
+
+                                <field id="drct:raisonSociale"             label-id="workflow.field.raisonSociale"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:identifiant"               label-id="workflow.field.identifiant"
+                                       set="RaisonsocialeIdentifiant"/>
+                                <field id="drct:montantDeCreance"          label-id="workflow.field.montantDeCreance"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:interetDeRetard"           label-id="workflow.field.interetDeRetard"
+                                       set="MontantInteretFrais"/>
+                                <field id="drct:fraidDeDossier"            label-id="workflow.field.fraidDeDossier"
+                                       set="MontantInteretFrais"/>
+
+                                <field id="drct:natureDeLaCreance"         label-id="workflow.field.natureDeLaCreance"
+                                       set="informationGenerale"/>
+                                <field id="drct:garant"                    label-id="workflow.field.garant"
+                                       set="informationGenerale"/>
+
+                                <field id="drct:creances"                  label-id="workflow.field.creances"
+                                       set="detailDeCreance"/>
+                                <field id="drct:montantDeLaCreance"        label-id="workflow.field.montantDeLaCreance "
+                                       set="detailDeCreance"/>
+                                <field id="drct:nature"                    label-id="workflow.field.nature"
+                                       set="detailDeCreance"/>
+                                <field id="drct:date"                      label-id="workflow.field.date"
+                                       set="detailDeCreance"/>
+
+                                <field id="drct:dateDeVersement"           label-id="workflow.field.dateDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:montantDeVersement"        label-id="workflow.field.montantDeVersement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:modeDeReglement"           label-id="workflow.field.modeDeReglement"
+                                       set="detailDeVersement"/>
+                                <field id="drct:affectation"               label-id="workflow.field.affectation"
+                                       set="detailDeVersement"/>
+
+                                <field id="drct:type"                      label-id="workflow.field.type"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:natureDeLHypothequeEnquetes" label-id="workflow.field.natureDeLHypothequeEnquetes"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Rang"                      label-id="workflow.field.Rang"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:immatriculation"           label-id="workflow.field.immatriculation"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:dateFinDeLHypotheque"      label-id="workflow.field.dateFinDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:montantDeLHypotheque"      label-id="workflow.field.montantDeLHypotheque"
+                                       set="garantieEtEnquete"/>
+                                <field id="drct:Valeure"                   label-id="workflow.field.Valeur"
+                                       set="garantieEtEnquete"/>
+
+                                <field id="drct:nomDeSaisine"              label-id="workflow.field.nomDeSaisine"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:region"                    label-id="workflow.field.region"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:typeDeTiers"               label-id="workflow.field.typeDeTiers"
+                                       set="saisineDesTiers"/>
+                                <field id="drct:nomDeTiers"                label-id="workflow.field.nomDeTiers"
+                                       set="saisineDesTiers"/>
+
+
+                                <field id="drct:natureDuFrais"             label-id="workflow.field.natureDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:typeDuFrais"               label-id="workflow.field.typeDuFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:tiers"                     label-id="workflow.field.tiers"
+                                       set="detailDesFrais"/>
+                                <field id="drct:montantsDesFrais"          label-id="workflow.field.montantsDesFrais"
+                                       set="detailDesFrais"/>
+                                <field id="drct:dateDEffetDesIr"           label-id="workflow.field.dateDEffetDesIr"
+                                       set="detailDesFrais"/>
+
+                                <field id="drct:regionAvocat"           label="region"
+                                       set="avocat"/>
+                                <field id="drct:avocatAvocat"           label="type"
+                                       set="avocat"/>
+
+                                <field id="drct:regionHuissier"           label="region"
+                                       set="huissier"/>
+                                <field id="drct:avocatHuissier"           label="type"
+                                       set="huissier"/>
+
+                                <field id="drct:regionExpert"           label="region"
+                                       set="expert"/>
+                                <field id="drct:avocatExpert"           label="type"
+                                       set="expert"/>
+
+
+                                <field id="drct:phase"                     label-id="workflow.field.phase"
+                                       set="phase"/>
+
+                                <field id="packageItems" set="items"/>
+
+
+                                <field id="bpm:comment" set="comment">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                                        <control-param name="style">width: 95%</control-param>
+                                    </control>
+                                </field>
+
+
+
+                                <field id="drct:transitionOutcome" label-id="workflow.field.response"
+                                       set="response">
+                                    <control
+                                            template="/com/addinn/recouvrement/components/form/controls/workflow/customActiviti-transitions.ftl"/>
+
+                                    <!-- <constraint-handlers> -->
+                                    <!-- <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.arrete" -->
+                                    <!-- event="keyup" /> -->
+                                    <!-- </constraint-handlers> -->
+                                </field>
+
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+
+            </configurations>
+        </module>
+    </modules>
+</extension>

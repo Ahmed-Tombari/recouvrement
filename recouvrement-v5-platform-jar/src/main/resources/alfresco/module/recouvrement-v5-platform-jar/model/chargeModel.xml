@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0"
+	name="chm:chargeModel">
+	<description>Modèle des dossiers d'instruction technique de la
+		direction de la voirie
+	</description>
+	<author>salim brahim</author>
+	<imports>
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<import uri="http://www.alfresco.org/model/datalist/1.0"
+			prefix="dl" />
+		<import uri="http://www.alfresco.org/model/content/1.0"
+			prefix="cm" />
+	</imports>
+	<namespaces>
+		<namespace
+			uri="http://www.addinn.com/model/chargeModel/1.0"
+			prefix="chm" />
+	</namespaces>
+
+	<constraints>
+		<constraint name="chm:motifList" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>maladie</value>
+					<value>conge</value>
+					<value>depart</value>
+				</list>
+			</parameter>
+		</constraint>
+	</constraints>
+
+	<aspects>
+		<aspect name="chm:charge">
+			<title>increment</title>
+			<properties>
+				<property name="chm:codechargee">
+					<title>code chargee</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="chm:nomchargee">
+					<title>nom chargee</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="chm:prenomchargee">
+					<title>prenom chargee</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="chm:adressechargee">
+					<title>adresse chargee</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:codePostalechargee">
+					<title>code Postale chargee</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:villechargee">
+					<title>ville chargee</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:gouvernoratchargee">
+					<title>gouvernorat chargee</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:telephonechargee">
+					<title>telephone chargee</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:totalportfeuille">
+					<title>total portfeuille</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:totalrecouvrement">
+					<title>total recouvrement</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:totalimpaye">
+					<title>total impaye</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:nbrededossier">
+					<title>nbre de dossier</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:totaldossiersolde">
+					<title>total dossier solde</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:disponibilite">
+					<title>total dossier solde</title>
+					<type>d:boolean</type>
+
+				</property>
+				<property name="chm:dateDeLaProchaineDisponibilite">
+					<title>total dossier solde</title>
+					<type>d:date</type>
+
+				</property>
+				<property name="chm:palierMontant">
+					<title>palier montant</title>
+					<type>d:text</type>
+
+				</property>
+				<property name="chm:motif">
+					<title>motif</title>
+					<type>d:text</type>
+					<constraints>
+
+						<constraint ref="chm:motifList" />
+
+					</constraints>
+				</property>
+
+			</properties>
+		</aspect>
+
+
+	</aspects>
+</model>

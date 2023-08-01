@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0" name="rwf:recouvrementWF">
+    <author>NT</author>
+    <imports>
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+    </imports>
+    <namespaces>
+        <namespace uri="http://www.addinn.com/model/recouvrementWF/1.0" prefix="rwf"/>
+    </namespaces>
+
+    <types>
+
+        <!-- PARTIE pour le Workflow "Avis voirie" -->
+
+        <type name="rwf:recouvrement">
+            <parent>bpm:startTask</parent>
+        </type>
+
+        <type name="rwf:dossierRecouvrement">
+            <parent>bpm:activitiOutcomeTask</parent>
+            <properties>
+                <property name="rwf:dossierRecouvrementOutcome">
+                    <type>d:text</type>
+                    <default>Rejeter</default>
+                    <constraints>
+                        <constraint type="LIST" name="rwf:dossierRecouvrementOutcomeList">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Valider</value>
+                                    <value>Rejeter</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+
+            </properties>
+            <overrides>
+                <property name="bpm:packageItemActionGroup">
+                    <default>read_package_item_actions</default>
+                </property>
+                <property name="bpm:outcomePropertyName">
+                    <default>{http://www.addinn.com/model/recouvrementWF/1.0}dossierRecouvrement
+                    </default>
+                </property>
+            </overrides>
+            <mandatory-aspects>
+                <aspect>rwf:dossierProps</aspect>
+            </mandatory-aspects>
+
+        </type>
+
+    </types>
+    <aspects>
+        <aspect name="rwf:dossierProps">
+            <properties>
+                <property name="rwf:numeroDossier">
+                    <title>Numéro dossier</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="rwf:phase">
+                    <title>Phase</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>TRUE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                    <constraints>
+                        <constraint name="rwf:LIST_Phases" type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Amiable</value>
+                                    <value>Précontentieuse</value>
+                                    <value>Judiciaire</value>
+                                </list>
+                            </parameter>
+                            <parameter name="sorted">
+                                <value>false</value>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="rwf:montant">
+                    <title>Montant</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+                <property name="rwf:NomPrenomDebuter">
+                    <title>Nom prénom débuter </title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>FALSE</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+        </aspect>
+
+    </aspects>
+</model>
